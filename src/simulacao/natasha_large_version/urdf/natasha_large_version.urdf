@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="natasha_large_version">
+  <link
+    name="TRUNK">
+    <inertial>
+      <origin
+        xyz="3.21531137728245E-06 0.0199722446007501 -0.00076861367046635"
+        rpy="0 0 0" />
+      <mass
+        value="1.26920726032873" />
+      <inertia
+        ixx="0.000862452850516643"
+        ixy="4.76801948849434E-07"
+        ixz="3.21564426902003E-07"
+        iyy="0.000918320502196375"
+        iyz="-2.60433985952879E-05"
+        izz="0.00116770299554503" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/TRUNK.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/TRUNK.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="LARM_0_link">
+    <inertial>
+      <origin
+        xyz="0.00940240087518637 -0.00459323020780417 2.56257274614535E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.00841209856959275" />
+      <inertia
+        ixx="5.77730890287294E-06"
+        ixy="6.19456005674588E-07"
+        ixz="-3.45595802146455E-09"
+        iyy="6.26878480674541E-06"
+        iyz="-2.05734681986293E-08"
+        izz="2.58125108097758E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_0_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_0_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LARM_0"
+    type="continuous">
+    <origin
+      xyz="0.0968 0.1115 0.015"
+      rpy="0 0 0" />
+    <parent
+      link="TRUNK" />
+    <child
+      link="LARM_0_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="LARM_1_link">
+    <inertial>
+      <origin
+        xyz="3.00359100668945E-06 -0.0257483739604654 -0.0305562866741417"
+        rpy="0 0 0" />
+      <mass
+        value="0.282144038261953" />
+      <inertia
+        ixx="0.000235599776563821"
+        ixy="-5.01177227536898E-09"
+        ixz="7.05866128584455E-09"
+        iyy="7.18592350177666E-05"
+        iyz="-2.13752399757466E-06"
+        izz="0.00020311677233329" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LARM_1"
+    type="continuous">
+    <origin
+      xyz="0.0338426329686549 -0.0236234517093273 0.0309322750601174"
+      rpy="0 0 0" />
+    <parent
+      link="LARM_0_link" />
+    <child
+      link="LARM_1_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="LARM_2_link">
+    <inertial>
+      <origin
+        xyz="0.0306929728476374 -0.0310158149378891 0.0003129367559844"
+        rpy="0 0 0" />
+      <mass
+        value="0.27293781777133" />
+      <inertia
+        ixx="0.000179125406082729"
+        ixy="2.86957261927918E-06"
+        ixz="-2.30638103725574E-08"
+        iyy="7.11476477305268E-05"
+        iyz="-2.84116422304083E-06"
+        izz="0.000195018905956355" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LARM_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LARM_2"
+    type="continuous">
+    <origin
+      xyz="-0.0306999999999869 -0.172669139288186 -0.029835882971163"
+      rpy="0 0 0" />
+    <parent
+      link="LARM_1_link" />
+    <child
+      link="LARM_2_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="RARM_0_link">
+    <inertial>
+      <origin
+        xyz="-0.00940240087518641 -0.00459330169048291 -8.57647286522933E-15"
+        rpy="0 0 0" />
+      <mass
+        value="0.00841209856959274" />
+      <inertia
+        ixx="5.77730890287297E-06"
+        ixy="-6.19465646030649E-07"
+        ixz="4.93661021143863E-22"
+        iyy="6.26889958655513E-06"
+        iyz="-2.34198650391147E-21"
+        izz="2.58113630116789E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_0_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_0_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RARM_0"
+    type="continuous">
+    <origin
+      xyz="-0.0968 0.1115 0.015"
+      rpy="0 0 0" />
+    <parent
+      link="TRUNK" />
+    <child
+      link="RARM_0_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="RARM_1_link">
+    <inertial>
+      <origin
+        xyz="3.00358997740169E-06 -0.0255775017447445 -0.0306994596286303"
+        rpy="0 0 0" />
+      <mass
+        value="0.282144038261623" />
+      <inertia
+        ixx="0.000235599776566633"
+        ixy="-5.05107402263444E-09"
+        ixz="7.03059323035076E-09"
+        iyy="7.18871701872225E-05"
+        iyz="-2.86965669064334E-06"
+        izz="0.00020308883716607" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RARM_1"
+    type="continuous">
+    <origin
+      xyz="-0.0338426329686426 -0.0237956531967124 0.0307999999999913"
+      rpy="0 0 0" />
+    <parent
+      link="RARM_0_link" />
+    <child
+      link="RARM_1_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="RARM_2_link">
+    <inertial>
+      <origin
+        xyz="-0.0305140974902367 -0.0312468497287387 -0.000140933216771333"
+        rpy="0 0 0" />
+      <mass
+        value="0.270930787978609" />
+      <inertia
+        ixx="0.000178890790974223"
+        ixy="-2.86965663321463E-06"
+        ixz="-7.05429511612378E-09"
+        iyy="7.10643926880802E-05"
+        iyz="3.53204228498498E-06"
+        izz="0.000194864532410531" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RARM_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RARM_2"
+    type="continuous">
+    <origin
+      xyz="0.0306999999999747 -0.172499999994899 -0.0308012715955298"
+      rpy="0 0 0" />
+    <parent
+      link="RARM_1_link" />
+    <child
+      link="RARM_2_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="LLEG_0_link">
+    <inertial>
+      <origin
+        xyz="0.00612203013391536 -0.0103947051970067 -4.9359241315633E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.0105539011684931" />
+      <inertia
+        ixx="2.17100692074752E-05"
+        ixy="1.31739083355003E-06"
+        ixz="-1.39996221652366E-07"
+        iyy="2.08986152822178E-05"
+        iyz="-1.06215439396316E-08"
+        izz="4.34745682743105E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_0_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_0_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LLEG_0"
+    type="continuous">
+    <origin
+      xyz="0.024 -0.1548 0"
+      rpy="0 0 0" />
+    <parent
+      link="TRUNK" />
+    <child
+      link="LLEG_0_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="LLEG_1_link">
+    <inertial>
+      <origin
+        xyz="0.000490083874728403 -0.0147653879092084 0.0547732575073225"
+        rpy="0 0 0" />
+      <mass
+        value="0.181419970836516" />
+      <inertia
+        ixx="7.50578103372844E-05"
+        ixy="-4.54616664216692E-07"
+        ixz="5.84190838612279E-09"
+        iyy="4.76781980937785E-05"
+        iyz="4.52688057648414E-07"
+        izz="7.57823474976998E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LLEG_1"
+    type="continuous">
+    <origin
+      xyz="0.023655735941974 -0.0342918830920366 -0.0541924809172262"
+      rpy="0 0 0" />
+    <parent
+      link="LLEG_0_link" />
+    <child
+      link="LLEG_1_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="LLEG_2_link">
+    <inertial>
+      <origin
+        xyz="-0.0301565669221788 -0.161876682091609 0.000241171769913784"
+        rpy="0 0 0" />
+      <mass
+        value="0.159540670084124" />
+      <inertia
+        ixx="0.000293469086188188"
+        ixy="-1.06334592206261E-06"
+        ixz="8.81938752457176E-09"
+        iyy="3.1046812381603E-05"
+        iyz="6.70401268151818E-09"
+        izz="0.000294252015901616" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LLEG_2"
+    type="continuous">
+    <origin
+      xyz="0.0316036648943565 0 0.0747476311681364"
+      rpy="0 0 0" />
+    <parent
+      link="LLEG_1_link" />
+    <child
+      link="LLEG_2_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="LLEG_3_link">
+    <inertial>
+      <origin
+        xyz="0.0316277847353485 -0.130369107458375 -0.000344713442999328"
+        rpy="0 0 0" />
+      <mass
+        value="0.303876403523408" />
+      <inertia
+        ixx="0.000214694101119081"
+        ixy="-1.80851203817404E-08"
+        ixz="-2.57038988582136E-07"
+        iyy="7.05223178071358E-05"
+        iyz="-2.86960414758001E-06"
+        izz="0.00018368763075357" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_3_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_3_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LLEG_3"
+    type="continuous">
+    <origin
+      xyz="-0.0607980239476936 -0.226000000000008 0.00049018777589982"
+      rpy="0 0 0" />
+    <parent
+      link="LLEG_2_link" />
+    <child
+      link="LLEG_3_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="LLEG_4_link">
+    <inertial>
+      <origin
+        xyz="0.000248318807572437 -0.0298481620218618 0.0307989989735024"
+        rpy="0 0 0" />
+      <mass
+        value="0.0178124172693719" />
+      <inertia
+        ixx="1.29037915829976E-05"
+        ixy="5.51639432831206E-21"
+        ixz="1.05840415522657E-08"
+        iyy="1.31225982820873E-05"
+        iyz="9.15483685050164E-21"
+        izz="1.42164456583534E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_4_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LLEG_4_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LLEG_4"
+    type="continuous">
+    <origin
+      xyz="0.032051 -0.159 -0.031059"
+      rpy="0 0 0" />
+    <parent
+      link="LLEG_3_link" />
+    <child
+      link="LLEG_4_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="LFOOT_link">
+    <inertial>
+      <origin
+        xyz="0.0305920589025173 -0.00282506301285901 -0.013461611204285"
+        rpy="0 0 0" />
+      <mass
+        value="0.271509815127884" />
+      <inertia
+        ixx="0.000228930028031411"
+        ixy="8.70837809135713E-09"
+        ixz="1.72701553308135E-06"
+        iyy="0.000276272831150935"
+        iyz="2.08043568732605E-07"
+        izz="8.71711047249699E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LFOOT_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/LFOOT_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LFOOT"
+    type="continuous">
+    <origin
+      xyz="-0.0306506769158439 -0.0564732 0.0310481240109878"
+      rpy="0 0 0" />
+    <parent
+      link="LLEG_4_link" />
+    <child
+      link="LFOOT_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="HEAD_0_link">
+    <inertial>
+      <origin
+        xyz="0.000410296923872701 0.0288664319394756 0.00646679384756663"
+        rpy="0 0 0" />
+      <mass
+        value="0.0798085141057842" />
+      <inertia
+        ixx="2.56842385883305E-05"
+        ixy="-8.80458733494781E-07"
+        ixz="3.93515602357504E-09"
+        iyy="1.90695023746044E-05"
+        iyz="-1.68607462942675E-08"
+        izz="3.14106441377739E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/HEAD_0_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/HEAD_0_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HEAD_0"
+    type="continuous">
+    <origin
+      xyz="0 0.1478 0.0155"
+      rpy="0 0 0" />
+    <parent
+      link="TRUNK" />
+    <child
+      link="HEAD_0_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="HEAD_1_link">
+    <inertial>
+      <origin
+        xyz="-0.0258400943742263 0.0381573454262648 0.0274492787854138"
+        rpy="0 0 0" />
+      <mass
+        value="0.152326806226058" />
+      <inertia
+        ixx="4.05123320248275E-05"
+        ixy="-7.60171191903906E-07"
+        ixz="-7.43431564751296E-07"
+        iyy="0.000149994189718149"
+        iyz="-3.30076136433724E-08"
+        izz="0.000171180503658015" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/HEAD_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/HEAD_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HEAD_1"
+    type="continuous">
+    <origin
+      xyz="0.0280000000000008 0.0472 0.00699999999999479"
+      rpy="0 0 0" />
+    <parent
+      link="HEAD_0_link" />
+    <child
+      link="HEAD_1_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="CAM_link">
+    <inertial>
+      <origin
+        xyz="4.33680868994202E-19 -4.07517424374504E-05 -0.00148592778088158"
+        rpy="0 0 0" />
+      <mass
+        value="0.000523075176822697" />
+      <inertia
+        ixx="7.84102521765054E-09"
+        ixy="6.74552439658311E-25"
+        ixz="2.46012722170761E-23"
+        iyy="7.84633230302992E-09"
+        iyz="1.93511863028883E-10"
+        izz="1.48970340164646E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/CAM_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/CAM_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="CAM"
+    type="fixed">
+    <origin
+      xyz="-0.0279999999999998 0.0394935319232594 0.0539375651677464"
+      rpy="0 0 0" />
+    <parent
+      link="HEAD_1_link" />
+    <child
+      link="CAM_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RLEG_0_link">
+    <inertial>
+      <origin
+        xyz="-0.00612167967049726 -0.0103947051970069 8.20201627594885E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.0105539011684931" />
+      <inertia
+        ixx="2.17080812453927E-05"
+        ixy="-1.31731541783251E-06"
+        ixz="-2.3261815308638E-07"
+        iyy="2.08986152822176E-05"
+        iyz="1.76498005098407E-08"
+        izz="4.34944478951339E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_0_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_0_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RLEG_0"
+    type="continuous">
+    <origin
+      xyz="-0.024 -0.1548 0"
+      rpy="0 0 0" />
+    <parent
+      link="TRUNK" />
+    <child
+      link="RLEG_0_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="RLEG_1_link">
+    <inertial>
+      <origin
+        xyz="0.000782297531256276 -0.0147653879058548 0.054769863344079"
+        rpy="0 0 0" />
+      <mass
+        value="0.181419970868412" />
+      <inertia
+        ixx="7.50578933077612E-05"
+        ixy="-4.52195058995045E-07"
+        ixz="9.70699692256529E-09"
+        iyy="4.76781980989049E-05"
+        iyz="4.55107039207314E-07"
+        izz="7.57822645562642E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RLEG_1"
+    type="continuous">
+    <origin
+      xyz="-0.024813164775028 -0.034291883092037 -0.053672392202768"
+      rpy="0 0 0" />
+    <parent
+      link="RLEG_0_link" />
+    <child
+      link="RLEG_1_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="RLEG_2_link">
+    <inertial>
+      <origin
+        xyz="-0.0301695503666304 -0.161872950308964 -0.000695044452108579"
+        rpy="0 0 0" />
+      <mass
+        value="0.159540670083779" />
+      <inertia
+        ixx="0.000293469007299364"
+        ixy="-1.08718753191533E-06"
+        ixz="5.62855354016357E-09"
+        iyy="3.10589296950973E-05"
+        iyz="-1.77142632039411E-06"
+        izz="0.000294239977479449" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RLEG_2"
+    type="continuous">
+    <origin
+      xyz="0.0320020009737805 0 0.0745779587657983"
+      rpy="0 0 0" />
+    <parent
+      link="RLEG_1_link" />
+    <child
+      link="RLEG_2_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="RLEG_3_link">
+    <inertial>
+      <origin
+        xyz="0.0316180462213434 -0.130059855148996 -0.000528088639634272"
+        rpy="0 0 0" />
+      <mass
+        value="0.300624517298702" />
+      <inertia
+        ixx="0.000214502759965271"
+        ixy="-3.04562405033601E-08"
+        ixz="-4.24766650547242E-07"
+        iyy="7.03238705271436E-05"
+        iyz="-2.64914364757082E-06"
+        izz="0.000183330990426917" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_3_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_3_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RLEG_3"
+    type="continuous">
+    <origin
+      xyz="-0.060815 -0.22599 -0.00071715"
+      rpy="0 0 0" />
+    <parent
+      link="RLEG_2_link" />
+    <child
+      link="RLEG_3_link" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="RLEG_4_link">
+    <inertial>
+      <origin
+        xyz="0.000413409934611461 -0.029788042340897 0.0308553788148227"
+        rpy="0 0 0" />
+      <mass
+        value="0.0178124172693719" />
+      <inertia
+        ixx="1.29039418768306E-05"
+        ixy="2.85796301667499E-11"
+        ixz="1.75864203140511E-08"
+        iyy="1.31226024421718E-05"
+        iyz="2.13307722245965E-09"
+        izz="1.42162912044359E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_4_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RLEG_4_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RLEG_4"
+    type="continuous">
+    <origin
+      xyz="0.0318886250707946 -0.159059760598063 -0.0309198665841209"
+      rpy="0 0 0" />
+    <parent
+      link="RLEG_3_link" />
+    <child
+      link="RLEG_4_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="RFOOT_link">
+    <inertial>
+      <origin
+        xyz="0.030519804524347 -0.00282506301278151 -0.0136246312201019"
+        rpy="0 0 0" />
+      <mass
+        value="0.27150981513215" />
+      <inertia
+        ixx="0.000228944420441069"
+        ixy="9.81818589585159E-09"
+        ixz="9.70630393834094E-07"
+        iyy="0.000276272831152002"
+        iyz="2.0799414771359E-07"
+        izz="8.71567123165016E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RFOOT_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://natasha_large_version/meshes/RFOOT_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RFOOT"
+    type="continuous">
+    <origin
+      xyz="-0.0304831213404382 -0.0564130296932004 0.0313212661369003"
+      rpy="0 0 0" />
+    <parent
+      link="RLEG_4_link" />
+    <child
+      link="RFOOT_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+</robot>

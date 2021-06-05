@@ -19,12 +19,5 @@
 
    <!-- MoveCreatorQt -->
   <node name="movecreator_qt" pkg="movecreator_qt" type="movecreator_qt" output="screen" >   </node>
-
-  <!-- Simulation Webots -->
-  <!-- Controller -->
-  <include file="$(find webots_natasha)/launch/start_joints.launch"/>
-  <!-- Simulation Ambient -->
-  <include file="$(find webots_natasha)/launch/natasha_webots.launch"/>
-
 </launch>
 

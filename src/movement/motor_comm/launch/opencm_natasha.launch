@@ -12,4 +12,6 @@
   <!-- Roda o node que abstrai a openCm para o resto do código -->
   <node name="opencm_transitions" pkg="motor_comm" type="opencm_transitions.py" output="screen" ></node>
 
+  <!-- Roda o node que converte as posições dos motores para a simulação -->
+  <node name="conversion_webots_node" pkg="motor_comm" type="conversion_webots_node"/>
 </launch>

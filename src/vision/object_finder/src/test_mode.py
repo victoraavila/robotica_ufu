@@ -12,9 +12,6 @@ from vision_msgs.msg import Ball
 from vision_msgs.msg import Objects
 from sensor_msgs.msg import Image
 
-import time
-import random
-
 class TestModeFinder:
     def __init__(self):
         """
@@ -24,19 +21,22 @@ class TestModeFinder:
         self.bridge = CvBridge()
         self.processor = imgproc.ImageProcessing(model='ssd_edrom')
         self.pub = rospy.Publisher('objects', Objects, queue_size=100)
-
-        self.real_images_folder = os.path.join(os.path.expanduser('~'), "edrom/src/vision/robocup_videos/frames_real_world")
-        self.real_images_list = os.listdir(self.real_images_folder)
-        for i in range(len(self.real_images_list)):
-            self.real_images_list[i] = os.path.join(os.path.expanduser('~'), "edrom/src/vision/robocup_videos/frames_real_world", self.real_images_list[i])
-        
-        self.beginning_time = 0
-        self.first_photo = True
-
         self.contador = 0
         
     def live_mode(self):
-        os.system('clear')
+        camera = 1
+        while True:
+            try:
+                self.cap = cv2.VideoCapture(camera)
+                if self.cap is None or not self.cap.isOpened():
+                    raise Exception('Failure to open capture.')
+                os.system('clear')
+                break
+            except Exception:
+                camera = camera + 1
+                if camera == 20:
+                    camera = 0
+                self.cap.release()
 
         print ("****VISION SITUATION****\n")
         print ('.................................Starting Live Feed')
@@ -59,14 +59,8 @@ class TestModeFinder:
 
         print (".................................Starting Neural Network")  
         while not rospy.is_shutdown():
-            
-            if time.time() - self.beginning_time >= 3 or self.first_photo == True:
-                self.image_filename = random.choice(self.real_images_list)
-                self.frame = cv2.imread(self.image_filename)
 
-                self.first_photo = False
-                self.beginning_time = time.time()
-
+            ret, self.frame = self.cap.read()
             try:
                 if self.contador % 2 == 0:
                     detections = self.processor.detect(self.frame)

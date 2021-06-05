@@ -27,12 +27,20 @@ Definições estabelecidas na criação desse código do behavior:
     - As variaveis SEMPRE serão passadas para a maquina de estados dentro do método update_state_machine.
 """
 
+# ----------------------- Constantes de Alinhamento do Corpo ----------------------- #
+demand_to_go_ahead = "andar reto"                       #Estas três constantes são as
+demand_to_turn_left = "virar esquerda"                  #strings a serem passadas ao
+demand_to_turn_right = "virar direita"                  #service do yamlTransition.py,
+                                                        #relativas à chamada de parâmetros
+                                                        #de alinhamento do corpo.
+
 class Brain():
 
     def __init__(self):
         self.moving = False
 
         # Variaveis para serem mandadas para a cabeça
+        self.headMsg = HeadMoveMsg()
         self.motorhead = 0
         self.neck_horizontal_position = -1
         self.neck_vertical_position = -1
@@ -143,16 +151,14 @@ class Brain():
 
         self.wState = msg.wState
         
-        self.period_counter = self.thoughts.period_counter(self.wState, self.old_wState, self.period_counter, self.walk_flag)
+        self.period_counter = self.thoughts.period_counter(self.wState, self.old_wState, self.period_counter, self.walk_flag, self.motor_limit_reached)
 
         self.walk_counter = 2*self.period_counter
         self.old_wState = self.wState
 
         self.update_state_machine()
 
-    def walk_service(self, first_pose, move_head, msg,test_mode):
-
-        self.walk_flag = msg
+    def walk_service(self, first_pose, move_head, walk_flag, test_mode):
         
         rospy.wait_for_service('/humanoid_walking/walking_cmd')
 
@@ -160,11 +166,11 @@ class Brain():
 
             service_walk = rospy.ServiceProxy('/humanoid_walking/walking_cmd', LipCmdSrv)
 
-            service_walk(first_pose, move_head, msg, False,test_mode, self.vx, self.vy, self.vz)
+            service_walk(first_pose, move_head, walk_flag, False, test_mode, self.vx, self.vy, self.vz)
 
         except rospy.ServiceException as e:
 
-            print("Service call failed: %s"%e)
+            print(f"Service call failed: {e}")
     
     def callback_walking(self,msg):
         self.walk_flag = msg.walk_flag
@@ -201,7 +207,7 @@ class Brain():
 
         except rospy.ServiceException as e:
 
-          print("Service call failed: %s"%e)
+          print(f"Service call failed: {e}")
 
     def call_params(self, string):
 
@@ -219,7 +225,7 @@ class Brain():
 
         except rospy.ServiceException as e:
 
-          print ("Service call failed: %s"%e)
+          print (f"Service call failed: {e}")
 
     # Método destinado a repassar as variveis para a máquina de estados
     def update_state_machine(self):
@@ -245,34 +251,36 @@ class Brain():
 
             print (self.robot.state)
 
-            self.walk_service( self.first_pose, False, False,self.test_mode)
-            self.pub = rospy.Publisher('opencm/request', OpencmRequestMsg)
-            fallMsg = OpencmRequestMsg()
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+            
+            '''Publicação no tópico para desligar os motores, passar para um lugar que faça isso mais rápido.'''
+            """ fallMsg = OpencmRequestMsg()
             fallMsg.commandRead = 'shutdown_now'
-            self.pub.publish(fallMsg)
+            self.pub_cm_request.publish(fallMsg) """
+
             time.sleep(1) # Esperar um pouco para garantir que ela caiu
             self.position_falled = self.thoughts.falled_position(self.x_sensor, self.y_sensor, self.z_sensor) #verificar a posição que a robo caiu 
             print (self.x_sensor, self.y_sensor)
             print (self.position_falled) 
 
             if self.walking == 'not_walking' or self.finished_page == 'finished':
-                fallMsg.commandRead = 'reborn'
-                self.pub.publish(fallMsg)                
+                """ fallMsg.commandRead = 'reborn'
+                self.pub_cm_request.publish(fallMsg) """                
 
                 if self.position_falled == 'front':
-                    self.walk_service( self.first_pose, False, False,self.test_mode)
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                     self.call_page('stand_up_front')
             
                 elif self.position_falled == 'back':
-                    self.walk_service( self.first_pose, False, False,self.test_mode)
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                     self.call_page('page_levantar_no_beck')
                 
                 elif self.position_falled == 'left_side':
-                    self.walk_service( self.first_pose, False, False,self.test_mode)
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                     self.call_page('page_levantar_ladinho_esquerdo')
                 
                 elif self.position_falled == 'right_side':
-                    self.walk_service(self.first_pose, False, False,self.test_mode)
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                     self.call_page('front_stand_up')
 
             elif self.finished_page == 'finished':
@@ -290,10 +298,10 @@ class Brain():
             '''
         elif (self.robot.state == 'S_Walking' and self.finished_page == 'finished' and (self.before_body_alignment == self.body_alignment)):
             
-            self.walk_service(self.first_pose, False, True,self.test_mode)
+            self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
 
             if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
-                self.walk_service(self.first_pose, False, False,self.test_mode)
+                self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                 self.moving = False
                 self.robot.state = 'S_Search_ball'
                 print('Mandei Walk_flag falso')
@@ -309,9 +317,9 @@ class Brain():
             if self.body_alignment == 'body_centralized':
                 # Mandar comando para carregar yaml para andar reto
 
-                self.call_params('andar reto')
+                self.call_params(demand_to_go_ahead)
                 self.moving = True
-                self.walk_service(self.first_pose, False, True, self.test_mode)
+                self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('Andando reto')
                 
                 self.update_state_machine()
@@ -319,76 +327,74 @@ class Brain():
             elif self.body_alignment == 'turn_left':
                 # Mandar comando para carregar yaml para girar para esquerda
 
-                self.call_params('virar esquerda')
+                self.call_params(demand_to_turn_left)
                 self.moving = True
-                self.walk_service(self.first_pose, False, True, self.test_mode)
+                self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('girando para esquerda')
                 self.update_state_machine()
 
             elif self.body_alignment == 'turn_right':
                 # Mandar comando para carregar yaml para girar para direita
-                self.call_params('virar direita')
+                self.call_params(demand_to_turn_right)
                 self.moving = True
-                self.walk_service(self.first_pose, False, True,self.test_mode)
+                self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('girando para direita')
                 self.update_state_machine()
        
             if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
-                self.walk_service( self.first_pose, False, False,self.test_mode)
+                self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
                 self.moving = False
                 self.robot.state = 'S_Search_ball'
                 print('Mandei Walk_flag falso')
                 self.update_state_machine()
                 
         elif (self.robot.state == 'S_Kick' and self.finished_page == 'finished'):
-            self.walk_service(self.first_pose, False, False,self.test_mode)
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
             self.call_page('page_kick')
             #self.finish_kicking = True
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Stand_still' and self.finished_page == 'finished'):
-            self.walk_service(self.first_pose, False, False,self.test_mode)
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
             self.call_page('page_stand_shield')
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Search_ball' and self.finished_page == 'finished'):
-            self.pub = rospy.Publisher('/motor_comm/head_params', HeadMoveMsg)
-            garcao = HeadMoveMsg()
-            garcao.pos = self.motorhead
-            self.pub.publish(garcao)
+            self.headMsg.pos = self.motorhead
+            self.pub_comm_head_params.publish(self.headMsg)
 
             self.move_head = True
-            self.walk_service(self.first_pose, self.move_head, False, self.test_mode)
+            self.walk_service(self.first_pose, move_head = self.move_head, walk_flag = False, test_mode = self.test_mode)
 
             self.update_state_machine()
             
         elif (self.robot.state == 'S_Body_alignment' and self.finished_page == 'finished'): 
 
-            if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
-                self.walk_service(self.first_pose, False, False, self.test_mode)
+            if self.walk_counter >= (self.before_walk_counter + self.steps_number/2):
+                self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
                 self.moving = False
                 self.robot.state = 'S_Search_ball'
-                print('@@@@@@@@@@@@@@@Mandei Walk_flag falso@@@@@@@@@@@@@')
                 self.before_walk_counter = self.walk_counter
                 self.update_state_machine()       
 
             elif self.body_alignment == 'turn_left':
                 
                 if (self.before_body_alignment != self.body_alignment):
-                    self.call_params('virar esquerda')
+                    self.call_params(demand_to_turn_left)
                 
                 self.moving = True
-                self.walk_service(self.first_pose, False, True, self.test_mode)
+                self.walk_service(self.first_pose, move_head = True, walk_flag = True, test_mode = self.test_mode)
 
             elif self.body_alignment == 'turn_right':
 
                 if (self.before_body_alignment != self.body_alignment):
-                    self.call_params('virar direita')
+                    self.call_params(demand_to_turn_right)
 
                 self.moving = True
-                self.walk_service(self.first_pose, False, True, self.test_mode)
+                self.walk_service(self.first_pose, move_head = True, walk_flag = True, test_mode = self.test_mode)
             
-            self.before_walk_counter = self.walk_counter
+            self.headMsg.pos = self.motorhead
+            self.pub_comm_head_params.publish(self.headMsg)
             self.update_state_machine()
  
     def start(self):
@@ -402,23 +408,26 @@ class Brain():
         rospy.Subscriber('/humanoid_walking/lipFeedback', LipFeedBack, self.callback_ground)
         rospy.Subscriber('/humanoid_walking/walking_params_state', LipParamsMsg, self.callback_walking)
 
+        """ self.pub_cm_request = rospy.Publisher('opencm/request', OpencmRequestMsg) """
+        self.pub_comm_head_params = rospy.Publisher('/motor_comm/head_params', HeadMoveMsg, queue_size = 100)
+       
         self.robot.game_controller = True
 
         self.update_state_machine() # Método para atualizar a máquina de estados
         
         self.test_mode = True
         self.first_pose = False
-        self.walk_service(self.first_pose, False, False,self.test_mode)
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
         
         time.sleep(10)
 
         self.first_pose = True
-        self.walk_service(self.first_pose, False, False,self.test_mode)
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
 
         time.sleep(10)
 
         self.first_pose = False
-        self.walk_service(self.first_pose, False, False,self.test_mode)
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
         print (self.robot.state)
 
         # Loop que mantém o Behaviour em execução
@@ -435,6 +444,7 @@ class Brain():
             print ("Passos: ", self.walk_counter)
             print("Passos anteriores: ", self.before_walk_counter)
             print("Walk_flag: ", self.walk_flag)
+            print("Movimento da Cabeça: ", self.motorhead)
             
             self.run_movement()
             self.before_body_alignment = self.body_alignment

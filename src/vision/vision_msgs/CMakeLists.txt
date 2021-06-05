@@ -22,6 +22,9 @@ add_message_files(
    Ball.msg
    Goal.msg
    Robot.msg
+   Leftgoalpost.msg
+   Rightgoalpost.msg
+   Webotsmsg.msg
 )
 
 

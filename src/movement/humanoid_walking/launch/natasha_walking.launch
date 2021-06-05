@@ -2,7 +2,6 @@
   <!-- Humanoid LoadMap -->
   <include file="$(find motor_comm)/launch/opencm_natasha.launch"/>
 
-
   <!-- Humanoid Model -->
   <rosparam file="$(find humanoid_model)/config/robotParams_Natasha.yaml" command="load"/>
   <node name="humanoid_model" pkg="humanoid_model" type="humanoidmodel_node" output="screen" >   </node>

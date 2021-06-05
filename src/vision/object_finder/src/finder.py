@@ -5,8 +5,6 @@ import rospy
 import src.game_mode as game_mode
 import src.test_mode as test_mode
 
-import time
-
 def main(args):
 
     gm = game_mode.GameModeFinder()
@@ -25,7 +23,6 @@ def main(args):
             gm.game_mode()
             rospy.spin()
         else:
-            tm.beginning_time = time.time()
             tm.live_mode()
     except rospy.ROSInterruptException:
         print('Exception')

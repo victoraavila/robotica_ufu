@@ -46,7 +46,7 @@ class Think(object):
         self.ball = ball
         self.ball_centered = False
         self.ball_close = False
-        self.motorhead = 3 #Motor horizontal da câmera
+        self.motorhead = 3 #Movimento de procura
        
         if self.ball == True:
        
@@ -63,10 +63,10 @@ class Think(object):
                     self.motorhead = -1 #Mover para a esquerda
 
                 if y_ball < yTop_to_centralize:
-                    self.motorhead = 2 #Mover para cima
+                    self.motorhead = -2 #Mover para cima
 
                 elif y_ball > yBottom_to_centralize:
-                    self.motorhead = -2 #Mover para baixo
+                    self.motorhead = 2 #Mover para baixo
      
         if roi_width >= ball_width and roi_height >= ball_height:
             self.ball_close = True
@@ -78,7 +78,7 @@ class Think(object):
         return self.game_controller
 
     def sensor_think(self, x_sensor, y_sensor, z_sensor):
-        if abs(y_sensor) < gravitySecurity:
+        if y_sensor < gravitySecurity:
             return True
         else :
             return False  
@@ -132,9 +132,9 @@ class Think(object):
 
             return "not_finished"
     
-    def period_counter(self, wState, old_wState, counter, walk_flag):
+    def period_counter(self, wState, old_wState, counter, walk_flag, motor_limit_reached):
         
-        if not(wState == old_wState) and walk_flag == True:
+        if not(wState == old_wState) and (walk_flag == True or motor_limit_reached == True):
 
             counter += 1
         

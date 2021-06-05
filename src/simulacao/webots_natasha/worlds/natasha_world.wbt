@@ -12,7 +12,1067 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-Natasha {
-  translation 0 0.46 0
-  rotation 1 0 0 -5.307179586466759e-06
+DEF Natasha Robot {
+  translation 6.776263578034403e-20 0.4298636800000001 2.168404344971009e-19
+  rotation -1 4.395366286605338e-15 -3.762720055309578e-13 5.307179586466813e-06
+  children [
+    Natasha_TRUNKMesh {
+    }
+    HingeJointWithBacklash {
+      jointParameters HingeJointParameters {
+        position 6.796695161617074e-23
+        axis -1 0 0
+        anchor 0.1318 0.0615 0.013
+        dampingConstant 0.81
+        staticFriction 2.55
+      }
+      device [
+        RotationalMotor {
+          name "LARM_0 [shoulder]"
+          maxVelocity 5.76
+        }
+        PositionSensor {
+          name "LARM_0_sensor"
+          resolution 0.0015
+        }
+      ]
+      endPoint DEF LARM_0 Solid {
+        translation 0.1318 0.061500000000000055 0.013
+        rotation -0.9999999999609579 2.691529513847346e-07 8.832423558509475e-06 7.69190619431661e-18
+        children [
+          Natasha_LARM_0_linkMesh {
+          }
+          HingeJointWithBacklash {
+            jointParameters HingeJointParameters {
+              position 8.374866773568194e-27
+              axis 0 0 1
+              anchor 0.033843 -0.023623 0.030932
+              dampingConstant 0.81
+              staticFriction 2.55
+            }
+            device [
+              RotationalMotor {
+                name "LARM_1"
+                maxVelocity 5.76
+              }
+              PositionSensor {
+                name "LARM_1_sensor"
+                resolution 0.0015
+              }
+            ]
+            endPoint DEF LARM_1 Solid {
+              translation 0.03384300000000001 -0.023623000000000005 0.030932000000000008
+              rotation -1 1.1120980356097277e-18 -3.9881405693407732e-16 0.005579
+              children [
+                Natasha_LARM_1_linkMesh {
+                }
+                HingeJointWithBacklash {
+                  jointParameters HingeJointParameters {
+                    position 2.24389217146418e-23
+                    axis -1 0 0
+                    anchor -0.0307 -0.1135 -0.0308
+                    dampingConstant 0.81
+                    staticFriction 2.55
+                  }
+                  device [
+                    RotationalMotor {
+                      name "LARM_2"
+                      maxVelocity 5.76
+                    }
+                    PositionSensor {
+                      name "LARM_2_sensor"
+                      resolution 0.0015
+                    }
+                  ]
+                  endPoint DEF LARM_2 Solid {
+                    translation -0.030700000000000005 -0.11349999999999999 -0.030800000000000004
+                    rotation 0.9999999999999999 1.5036568278232626e-22 6.0057587347838816e-21 0.003735000000000028
+                    children [
+                      Natasha_LARM_2_linkMesh_red {
+                      }
+                    ]
+                    name "LARM_2_link [hand]"
+                    boundingObject Transform {
+                      translation 0.0301 -0.094 -0.002
+                      rotation 1 0 0 1.567356
+                      children [
+                        Box {
+                          size 0.047 0.06 0.148
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.281497
+                      centerOfMass [
+                        0.030696 -0.027492 -0.000521
+                      ]
+                      inertiaMatrix [
+                        0.0001567534 7.289614e-05 0.0001709041
+                        2.869657e-06 -7.031453e-09 4.987205e-06
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "LARM_1_link [arm]"
+              boundingObject Transform {
+                translation 0 -0.059427 -0.0288
+                rotation 1 0 0 1.570796
+                children [
+                  Box {
+                    size 0.0558 0.0576 0.147854
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.313943
+                centerOfMass [
+                  3e-06 -0.023164 -0.03071
+                ]
+                inertiaMatrix [
+                  0.0002013128 7.422379e-05 0.0001666001
+                  -5.051075e-09 7.03026e-09 -2.869662e-06
+                ]
+              }
+            }
+          }
+        ]
+        name "LARM_0_link"
+        boundingObject Transform {
+          translation 0.0071 0.01 -1.126e-05
+          rotation 0.5768466619532455 -0.5792106605678825 -0.575988662456055 2.09031
+          children [
+            Box {
+              size 0.038 0.057 0.107
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.022713
+          centerOfMass [
+            0.009402 -0.004593 2.6e-05
+          ]
+          inertiaMatrix [
+            1.559873e-05 1.692572e-05 6.969378e-06
+            1.672531e-06 -9.331087e-09 -5.554836e-08
+          ]
+        }
+      }
+    }
+    HingeJointWithBacklash {
+      jointParameters HingeJointParameters {
+        position 6.34012609858338e-23
+        anchor -0.1318 0.0615 0.013
+        dampingConstant 0.81
+        staticFriction 2.55
+      }
+      device [
+        RotationalMotor {
+          name "RARM_0 [shoulder]"
+          maxVelocity 5.76
+        }
+        PositionSensor {
+          name "RARM_0_sensor"
+          resolution 0.0015
+        }
+      ]
+      endPoint DEF RARM_0 Solid {
+        translation -0.1318 0.0615 0.013
+        rotation -0.9999999999621316 -2.642108118319488e-07 -8.698682238868628e-06 7.285330379610121e-18
+        children [
+          Natasha_RARM_0_linkMesh {
+          }
+          HingeJointWithBacklash {
+            jointParameters HingeJointParameters {
+              position 9.548478380231958e-27
+              axis 0 0 1
+              anchor -0.033843 -0.023796 0.0308
+              dampingConstant 0.81
+              staticFriction 2.55
+            }
+            device [
+              RotationalMotor {
+                name "RARM_1"
+                maxVelocity 5.76
+              }
+              PositionSensor {
+                name "RARM_1_sensor"
+                resolution 0.0015
+              }
+            ]
+            endPoint DEF RARM_1 Solid {
+              translation -0.03384300000000001 -0.023795999999999984 0.030800000000000008
+              rotation -1.1994068023633707e-19 -4.229491099804307e-22 1 0.007823000000000007
+              children [
+                Natasha_RARM_1_linkMesh {
+                }
+                HingeJointWithBacklash {
+                  jointParameters HingeJointParameters {
+                    axis 0.999969 -0.007823 0
+                    anchor 0.0307 -0.1135 -0.0308
+                    dampingConstant 0.81
+                    staticFriction 2.55
+                  }
+                  device [
+                    RotationalMotor {
+                      name "RARM_2"
+                      maxVelocity 5.76
+                    }
+                    PositionSensor {
+                      name "RARM_2_sensor"
+                      resolution 0.0015
+                    }
+                  ]
+                  endPoint DEF RARM_2 Solid {
+                    translation 0.030699999999999977 -0.11349999999999999 -0.030800000000000008
+                    rotation 1 -1.392809770779633e-17 -2.8491875871158684e-16 0.017899000000000033
+                    children [
+                      Natasha_RARM_2_linkMesh_red {
+                      }
+                    ]
+                    name "RARM_2_link [hand]"
+                    boundingObject Transform {
+                      translation -0.031 -0.094 -0.002
+                      rotation 1 0 0 1.567356
+                      children [
+                        Box {
+                          size 0.047 0.06 0.148
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.282951
+                      centerOfMass [
+                        -0.030831 -0.027351 -0.000524
+                      ]
+                      inertiaMatrix [
+                        0.0001568982 7.297115e-05 0.0001709792
+                        -2.869657e-06 -7.031451e-09 4.997314e-06
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "RARM_1_link [arm]"
+              boundingObject Transform {
+                translation 0 -0.059427 -0.0288
+                rotation 1 0 0 1.570796
+                children [
+                  Box {
+                    size 0.0558 0.0576 0.147854
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.313943
+                centerOfMass [
+                  3e-06 -0.023164 -0.03071
+                ]
+                inertiaMatrix [
+                  0.0002013128 7.422379e-05 0.0001666001
+                  -5.051074e-09 7.030264e-09 -2.869657e-06
+                ]
+              }
+            }
+          }
+        ]
+        name "RARM_0_link"
+        boundingObject Transform {
+          translation -0.006 0.01 -1.126e-05
+          rotation 0.5768466619532455 -0.5792106605678825 -0.575988662456055 2.09031
+          children [
+            Box {
+              size 0.038 0.057 0.107
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.022713
+          centerOfMass [
+            -0.009402 -0.004593 0
+          ]
+          inertiaMatrix [
+            1.559873e-05 1.692603e-05 6.969068e-06
+            -1.672557e-06 -3.091976e-21 -9.471207e-21
+          ]
+        }
+      }
+    }
+    HingeJointWithBacklash {
+      jointParameters HingeJointParameters {
+        position 1.6695711725347957e-25
+        axis 0 1 0
+        anchor 0.052 -0.1028 -0.002
+        dampingConstant 0.81
+        staticFriction 2.55
+      }
+      device [
+        RotationalMotor {
+          name "LLEG_0"
+          maxVelocity 5.76
+        }
+        PositionSensor {
+          name "LLEG_0_sensor"
+          resolution 0.0015
+        }
+      ]
+      endPoint DEF LLEG_0 Solid {
+        translation 0.052 -0.10279999999999995 -0.002
+        rotation -9.984700298553158e-19 0.9999999999999216 3.956775661397196e-07 7.567393102677209e-18
+        children [
+          Natasha_LLEG_0_linkMesh {
+          }
+          HingeJointWithBacklash {
+            jointParameters HingeJointParameters {
+              position 2.796491602450908e-25
+              axis 2.6e-05 0 1
+              anchor 0 -0.0312 -0.0535
+              dampingConstant 0.81
+              staticFriction 2.55
+            }
+            device [
+              RotationalMotor {
+                name "LLEG_1 [hip]"
+                maxVelocity 5.76
+              }
+              PositionSensor {
+                name "LLEG_1_sensor"
+                resolution 0.0015
+              }
+            ]
+            endPoint DEF LLEG_1 Solid {
+              translation 0 -0.031200000000000006 -0.0535
+              rotation -9.984685759002904e-19 1 -1.2864764095919784e-13 2.599999424366558e-05
+              children [
+                Natasha_LLEG_1_linkMesh {
+                }
+                HingeJointWithBacklash {
+                  jointParameters HingeJointParameters {
+                    position 9.242450876386391e-23
+                    axis -1 2.6e-05 0
+                    anchor 0.031 0 0.075
+                    dampingConstant 0.81
+                    staticFriction 2.55
+                  }
+                  device [
+                    RotationalMotor {
+                      name "LLEG_2"
+                      maxVelocity 5.76
+                    }
+                    PositionSensor {
+                      name "LLEG_2_sensor"
+                      resolution 0.0015
+                    }
+                  ]
+                  endPoint DEF LLEG_2 Solid {
+                    translation 0.031000000000000007 0 0.075
+                    rotation 0.9999999665255984 -0.00025864850231577865 7.053674707263046e-06 1.3099364968793661e-17
+                    children [
+                      Natasha_LLEG_2_linkMesh {
+                      }
+                      HingeJointWithBacklash {
+                        jointParameters HingeJointParameters {
+                          position 8.653084689890612e-23
+                          axis 1 -2.6e-05 0
+                          anchor -0.0608 -0.131 0
+                          dampingConstant 0.81
+                          staticFriction 2.55
+                        }
+                        device [
+                          RotationalMotor {
+                            name "LLEG_3"
+                            maxVelocity 5.76
+                          }
+                          PositionSensor {
+                            name "LLEG_3_sensor"
+                            resolution 0.0015
+                          }
+                        ]
+                        endPoint DEF LLEG_3 Solid {
+                          translation -0.06080000000000001 -0.131 0
+                          rotation -0.9999999944018368 -0.00010577819158940661 -2.7019132877651943e-06 3.2030551084021865e-17
+                          children [
+                            Natasha_LLEG_3_linkMesh {
+                            }
+                            HingeJointWithBacklash {
+                              jointParameters HingeJointParameters {
+                                axis 0 0 1
+                                anchor 0.0323 -0.089 -0.0308
+                                dampingConstant 0.81
+                                staticFriction 2.55
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "LLEG_4"
+                                  maxVelocity 5.76
+                                }
+                                PositionSensor {
+                                  name "LLEG_4_sensor"
+                                  resolution 0.0015
+                                }
+                              ]
+                              endPoint DEF LLEG_4 Solid {
+                                translation 0.03230000000000001 -0.08900000000000001 -0.0308
+                                rotation 5.417391430922787e-06 -7.632314383991827e-05 0.9999999970727148 4.599093658811468e-17
+                                children [
+                                  Natasha_LLEG_4_linkMesh {
+                                  }
+                                  HingeJointWithBacklash {
+                                    jointParameters HingeJointParameters {
+                                      position 2.892547204775795e-23
+                                      axis 1 -2.6e-05 0
+                                      anchor -0.0308 -0.056473 0.0308
+                                      dampingConstant 0.81
+                                      staticFriction 2.55
+                                    }
+                                    device [
+                                      RotationalMotor {
+                                        name "LFOOT"
+                                        maxVelocity 5.76
+                                      }
+                                      PositionSensor {
+                                        name "LFOOT_sensor"
+                                        resolution 0.0015
+                                      }
+                                    ]
+                                    endPoint DEF LFOOT Solid {
+                                      translation -0.030800000000000004 -0.056472999999999995 0.0308
+                                      rotation -0.9999999997304564 2.3217409639986555e-05 -1.9812583361154388e-07 1.459302243483807e-16
+                                      children [
+                                        Natasha_LFOOT_linkMesh {
+                                        }
+                                      ]
+                                      name "LFOOT_link [foot]"
+                                      boundingObject Transform {
+                                        translation 0.0307 -0.0172 0.00828
+                                        rotation 0.7071067811865476 0.7071067811865476 0 3.141593
+                                        children [
+                                          Box {
+                                            size 0.0145 0.0602 0.13544
+                                          }
+                                        ]
+                                      }
+                                      physics Physics {
+                                        density -1
+                                        mass 0.282454
+                                        centerOfMass [
+                                          0.030703 -0.003479 -0.011661
+                                        ]
+                                        inertiaMatrix [
+                                          0.0001737066 0.0002100768 7.658709e-05
+                                          7.030787e-09 2.869657e-06 9.851627e-08
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                                name "LLEG_4_link"
+                                boundingObject Transform {
+                                  translation -0.0017 -0.0322 0.0297
+                                  rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.094395
+                                  children [
+                                    Box {
+                                      size 0.04 0.04 0.05
+                                    }
+                                  ]
+                                }
+                                physics Physics {
+                                  density -1
+                                  mass 0.048094
+                                  centerOfMass [
+                                    0 -0.029848 0.0308
+                                  ]
+                                  inertiaMatrix [
+                                    3.484001e-05 3.543102e-05 3.838463e-05
+                                    -7.090282e-21 1.934187e-21 2.94809e-20
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          name "LLEG_3_link"
+                          boundingObject Transform {
+                            translation 0.03 -0.03 0.002
+                            rotation 0 0.7071067811865476 0.7071067811865476 3.141593
+                            children [
+                              Box {
+                                size 0.042 0.04 0.07
+                              }
+                            ]
+                          }
+                          physics Physics {
+                            density -1
+                            mass 0.282112
+                            centerOfMass [
+                              0.031713 -0.068626 -9.7e-05
+                            ]
+                            inertiaMatrix [
+                              0.0001339854 6.822301e-05 0.0001052595
+                              5.051075e-09 -7.030262e-09 -2.869657e-06
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                    name "LLEG_2_link"
+                    boundingObject Transform {
+                      translation -0.02861 -0.044 0.004
+                      rotation 0.5818630987343212 0.5682170964187785 -0.5818630987343212 2.10815
+                      children [
+                        Box {
+                          size 0.04 0.04 0.08
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.129982
+                      centerOfMass [
+                        -0.030148 -0.095527 -2e-06
+                      ]
+                      inertiaMatrix [
+                        8.087011e-05 2.792203e-05 8.47583e-05
+                        -1.063365e-06 2.506233e-09 -1.869218e-09
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "LLEG_1_link"
+              boundingObject Transform {
+                translation -0.0003 -0.01837 0.036
+                rotation 1 0 0 3.141593
+                children [
+                  Box {
+                    size 0.02 0.04 0.0544
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.184781
+                centerOfMass [
+                  4.8e-05 -0.014497 0.053824
+                ]
+                inertiaMatrix [
+                  7.524372e-05 4.786415e-05 7.615081e-05
+                  -4.582516e-07 -9.745306e-14 4.490081e-07
+                ]
+              }
+            }
+          }
+        ]
+        name "LLEG_0_link"
+        boundingObject Transform {
+          translation 0 -0.0059 0
+          rotation 0 1 0 3.141593
+          children [
+            Box {
+              size 0.014 0.013 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.010661
+          centerOfMass [
+            0 -0.006243 0
+          ]
+          inertiaMatrix [
+            2.059135e-05 1.956029e-05 3.147287e-06
+            -2.387311e-21 4.479417e-20 5.059845e-21
+          ]
+        }
+      }
+    }
+    HingeJointWithBacklash {
+      jointParameters HingeJointParameters {
+        position 1.5576587784746288e-25
+        axis 0 1 0
+        anchor -0.052 -0.1028 -0.002
+        dampingConstant 0.81
+        staticFriction 2.55
+      }
+      device [
+        RotationalMotor {
+          name "RLEG_0"
+          maxVelocity 5.76
+        }
+        PositionSensor {
+          name "RLEG_0_sensor"
+          resolution 0.0015
+        }
+      ]
+      endPoint DEF RLEG_0 Solid {
+        translation -0.052 -0.10279999999999995 -0.002
+        rotation -9.984705708865509e-19 0.9999999999991944 1.269363859938413e-06 1.522536084339953e-18
+        children [
+          Natasha_RLEG_0_linkMesh {
+          }
+          HingeJointWithBacklash {
+            jointParameters HingeJointParameters {
+              position 2.7398530761384163e-25
+              axis 0 0 1
+              anchor 0 -0.0312 -0.0535
+              dampingConstant 0.81
+              staticFriction 2.55
+            }
+            device [
+              RotationalMotor {
+                name "RLEG_1 [hip]"
+                maxVelocity 5.76
+              }
+              PositionSensor {
+                name "RLEG_1_sensor"
+                resolution 0.0015
+              }
+            ]
+            endPoint DEF RLEG_1 Solid {
+              translation 0 -0.031200000000000006 -0.0535
+              rotation -7.729368153917578e-19 9.978586562557751e-07 0.9999999999995021 3.313450955999124e-18
+              children [
+                Natasha_RLEG_1_linkMesh {
+                }
+                HingeJointWithBacklash {
+                  jointParameters HingeJointParameters {
+                    position 4.3507953932648446e-23
+                    axis -1 0 0
+                    anchor 0.031 0 0.075
+                    dampingConstant 0.81
+                    staticFriction 2.55
+                  }
+                  device [
+                    RotationalMotor {
+                      name "RLEG_2"
+                      maxVelocity 5.76
+                    }
+                    PositionSensor {
+                      name "RLEG_2_sensor"
+                      resolution 0.0015
+                    }
+                  ]
+                  endPoint DEF RLEG_2 Solid {
+                    translation 0.031 -5.551115123125783e-17 0.07500000000000001
+                    rotation 0.9999999999785714 -2.5698258455819477e-08 6.546502160594465e-06 6.6458205042996514e-18
+                    children [
+                      Natasha_RLEG_2_linkMesh {
+                      }
+                      HingeJointWithBacklash {
+                        jointParameters HingeJointParameters {
+                          position 3.450368110171626e-23
+                          axis -1 0 0
+                          anchor 0.0004 -0.130989 0.001433
+                          dampingConstant 0.81
+                          staticFriction 2.55
+                        }
+                        device [
+                          RotationalMotor {
+                            name "RLEG_3"
+                            maxVelocity 5.76
+                          }
+                          PositionSensor {
+                            name "RLEG_3_sensor"
+                            resolution 0.0015
+                          }
+                        ]
+                        endPoint DEF RLEG_3 Solid {
+                          translation 0.00040000000000000105 -0.13098900000000002 0.0014330000000000037
+                          rotation -0.999999999994913 -5.5563196686340264e-08 3.1891999217306035e-06 1.0817457769439699e-17
+                          children [
+                            Natasha_RLEG_3_linkMesh {
+                            }
+                            HingeJointWithBacklash {
+                              jointParameters HingeJointParameters {
+                                position 5.180693660263624e-25
+                                axis 0 0 1
+                                anchor -0.0288 -0.089 -0.0308
+                                dampingConstant 0.81
+                                staticFriction 2.55
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "RLEG_4"
+                                  maxVelocity 5.76
+                                }
+                                PositionSensor {
+                                  name "RLEG_4_sensor"
+                                  resolution 0.0015
+                                }
+                              ]
+                              endPoint DEF RLEG_4 Solid {
+                                translation -0.0288 -0.08899999999999998 -0.0308
+                                rotation 7.729376982387255e-19 1.7025449724280524e-07 -0.9999999999999855 1.0405021629095445e-17
+                                children [
+                                  Natasha_RLEG_4_linkMesh {
+                                  }
+                                  HingeJointWithBacklash {
+                                    jointParameters HingeJointParameters {
+                                      position 1.325171149722559e-23
+                                      axis -1 0 0
+                                      anchor 0.0308 -0.056473 0.0308
+                                      dampingConstant 0.81
+                                      staticFriction 2.55
+                                    }
+                                    device [
+                                      RotationalMotor {
+                                        name "RFOOT"
+                                        maxVelocity 5.76
+                                      }
+                                      PositionSensor {
+                                        name "RFOOT_sensor"
+                                        resolution 0.0015
+                                      }
+                                    ]
+                                    endPoint DEF RFOOT Solid {
+                                      translation 0.0308 -0.056472999999999995 0.030800000000000008
+                                      rotation -0.9999999999999677 -3.151284903698647e-08 2.519498033105696e-07 5.2189088012128144e-17
+                                      children [
+                                        Natasha_RFOOT_linkMesh {
+                                        }
+                                      ]
+                                      name "RFOOT_link [foot]"
+                                      boundingObject Transform {
+                                        translation -0.0304 -0.0172 0.00828
+                                        rotation 0.7071067811865476 0.7071067811865476 0 3.141593
+                                        children [
+                                          Box {
+                                            size 0.0145 0.0602 0.13544
+                                          }
+                                        ]
+                                      }
+                                      physics Physics {
+                                        density -1
+                                        mass 0.282454
+                                        centerOfMass [
+                                          -0.030702 -0.003473 -0.011661
+                                        ]
+                                        inertiaMatrix [
+                                          0.0001737066 0.0002100768 7.658709e-05
+                                          7.030787e-09 -2.869657e-06 8.841412e-08
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                                name "RLEG_4_link"
+                                boundingObject Transform {
+                                  translation 0.001 -0.030811 0.0308
+                                  rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.094395
+                                  children [
+                                    Box {
+                                      size 0.04 0.04 0.05
+                                    }
+                                  ]
+                                }
+                                physics Physics {
+                                  density -1
+                                  mass 0.048094
+                                  centerOfMass [
+                                    0 -0.029848 0.0308
+                                  ]
+                                  inertiaMatrix [
+                                    3.484001e-05 3.543102e-05 3.838463e-05
+                                    -7.904298e-21 1.975152e-20 2.876769e-20
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          name "RLEG_3_link"
+                          boundingObject Transform {
+                            translation -0.036 -0.03 0.002
+                            rotation 0 0.7071067811865476 0.7071067811865476 3.141593
+                            children [
+                              Box {
+                                size 0.042 0.04 0.07
+                              }
+                            ]
+                          }
+                          physics Physics {
+                            density -1
+                            mass 0.282112
+                            centerOfMass [
+                              -0.029387 -0.068626 -9.7e-05
+                            ]
+                            inertiaMatrix [
+                              0.0001339854 6.822301e-05 0.0001052595
+                              5.051074e-09 -7.030264e-09 -2.869657e-06
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                    name "RLEG_2_link"
+                    boundingObject Transform {
+                      translation -0.02861 -0.044 0.004
+                      rotation 0.5818630987343212 0.5682170964187785 -0.5818630987343212 2.10815
+                      children [
+                        Box {
+                          size 0.04 0.04 0.08
+                        }
+                      ]
+                    }
+                    physics Physics {
+                      density -1
+                      mass 0.129982
+                      centerOfMass [
+                        -0.030252 -0.095518 0.001233
+                      ]
+                      inertiaMatrix [
+                        8.087011e-05 2.793094e-05 8.474939e-05
+                        1.063365e-06 2.506233e-09 5.924574e-07
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "RLEG_1_link"
+              boundingObject Transform {
+                translation -0.0003 -0.01837 0.036
+                rotation 1 0 0 3.141593
+                children [
+                  Box {
+                    size 0.02 0.04 0.0544
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.184781
+                centerOfMass [
+                  4.8e-05 -0.014497 0.053824
+                ]
+                inertiaMatrix [
+                  7.524372e-05 4.786415e-05 7.615081e-05
+                  -4.582516e-07 -9.682556e-14 4.490081e-07
+                ]
+              }
+            }
+          }
+        ]
+        name "RLEG_0_link"
+        boundingObject Transform {
+          translation 0 -0.0059 0
+          rotation 0 1 0 3.141593
+          children [
+            Box {
+              size 0.014 0.013 0.03
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.010661
+          centerOfMass [
+            0 -0.006243 0
+          ]
+          inertiaMatrix [
+            2.059135e-05 1.956029e-05 3.147287e-06
+            1.200515e-21 -5.011625e-21 1.048412e-20
+          ]
+        }
+      }
+    }
+    HingeJointWithBacklash {
+      jointParameters HingeJointParameters {
+        position 2.7070457830767676e-25
+        axis 0 1 0
+        anchor 0 0.1398 0.013
+        dampingConstant 0.81
+        staticFriction 2.55
+      }
+      device [
+        RotationalMotor {
+          name "HEAD_0"
+          maxVelocity 5.76
+        }
+        PositionSensor {
+          name "HEAD_0_sensor"
+          resolution 0.0015
+        }
+      ]
+      endPoint DEF HEAD_0 Solid {
+        translation 3.3503245321986854e-20 0.1398000000000001 0.013
+        rotation 9.98462193724745e-19 -0.9999999999923386 3.914450802939825e-06 4.742865567482047e-18
+        children [
+          Natasha_HEAD_0_linkMesh {
+          }
+          HingeJointWithBacklash {
+            jointParameters HingeJointParameters {
+              position 2.021919476602724e-23
+              axis -1 0 0
+              anchor 0.028004 0.0472 0.006983
+              dampingConstant 0.81
+              staticFriction 2.55
+            }
+            device [
+              RotationalMotor {
+                name "HEAD_1"
+                maxVelocity 5.76
+              }
+              PositionSensor {
+                name "HEAD_1_sensor"
+                resolution 0.0015
+              }
+            ]
+            endPoint DEF HEAD_1 Solid {
+              translation 0.028004 0.04719999999999991 0.006983000000000001
+              rotation -0.9999999999999953 4.911787719535758e-08 -8.381638780448523e-08 2.0812700656869689e-16
+              children [
+                Natasha_HEAD_1_linkMesh {
+                }
+                Camera {
+                  translation -0.027967 0.039494 0.053955
+                  rotation 0 -1 0 3.14159
+                  name "Camera"
+                  fieldOfView 1.0123
+                  width 416
+                  height 416
+                  focus Focus {
+                  }
+                }
+              ]
+              name "HEAD_1_link"
+              boundingObject Transform {
+                translation -0.03 0.035 0.0097
+                rotation 0.572116810531535 0.588021805264263 0.5717628106487695 2.079002
+                children [
+                  Box {
+                    size 0.06 0.063 0.126
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 0.162524
+                centerOfMass [
+                  -0.027984 0.037587 0.026108
+                ]
+                inertiaMatrix [
+                  4.365094e-05 0.0001525993 0.0001746338
+                  -3.864015e-10 8.108165e-08 -6.242101e-07
+                ]
+              }
+            }
+          }
+        ]
+        name "HEAD_0_link"
+        boundingObject Transform {
+          translation 0 -0.0018 -0.012
+          rotation 0.5771122445611764 -0.5774692447124613 -0.5774692447124613 4.188433
+          children [
+            Box {
+              size 0.076 0.041 0.09
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.08306
+          centerOfMass [
+            -0.00046 0.029584 0.006488
+          ]
+          inertiaMatrix [
+            2.60553e-05 1.925719e-05 3.159832e-05
+            -8.80469e-07 7.366428e-09 -1.631571e-08
+          ]
+        }
+      }
+    }
+    DEF FTRUNK Solid {
+      children [
+        Natasha_FTRUNK_linkMesh3r {
+        }
+      ]
+      name "FTRUNK_link"
+      boundingObject Transform {
+        translation 0 0 0.034
+        rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.094395
+        children [
+          Box {
+            size 0.0001 0.0001 0.0001
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.069081
+        centerOfMass [
+          0 0 0.038379
+        ]
+        inertiaMatrix [
+          0.0001866581 0.0002047033 0.000390739
+          2.235326e-19 -6.047708e-21 -1.598185e-20
+        ]
+      }
+    }
+    DEF BTRUNK Solid {
+      children [
+        Natasha_BTRUNK_linkMesh3r {
+        }
+      ]
+      name "BTRUNK_link"
+      boundingObject Transform {
+        translation 0 0 -0.038
+        rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.094395
+        children [
+          Box {
+            size 0.0001 0.0001 0.0001
+          }
+        ]
+      }
+      physics Physics {
+        density -1
+        mass 0.068241
+        centerOfMass [
+          0 -0.000756 -0.042471
+        ]
+        inertiaMatrix [
+          0.0001833143 0.0001985834 0.0003813765
+          -2.19718e-19 -2.2714e-20 3.927031e-07
+        ]
+      }
+    }
+    Accelerometer {
+      translation 8.8e-05 0.00055 0.0225
+      rotation 1 0 0 0
+      name "Accelerometer"
+      lookupTable [
+        -10 -10 0.01
+        10 10 0.01
+      ]
+    }
+  ]
+  name "red Natasha 3"
+  boundingObject Transform {
+    translation 0 0.001 -0.003
+    rotation 0.7071067811865476 0.7071067811865476 0 3.14
+    children [
+      Box {
+        size 0.185 0.17 0.09
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 2.044109
+    centerOfMass [
+      8.2e-05 0.017876 0.001487
+    ]
+    inertiaMatrix [
+      0.001809197 0.002419492 0.003434442
+      -3.10184e-07 -4.622968e-07 -7.625482e-06
+    ]
+  }
+  controller "<extern>"
+  supervisor TRUE
+  selfCollision TRUE
+  linearVelocity 3.1123102142592165e-18 -0.62784 1.1382993082670306e-17
+  angularVelocity 3.4611013425653774e-17 1.4603534975869568e-18 -6.193322490338632e-17
 }

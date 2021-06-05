@@ -1,9 +1,9 @@
 Webots Proto Cache File version 1.5
-protoFileHash: d83325df3e040a92e311f9ad1a7d8175
+protoFileHash: 7d2c5dbc3ae21c37297053868033849a
 needsRobotAncestor: 1
 baseType: Robot
 slotType: 
-parameters: translation,rotation,name,controller,controllerArgs,customData,supervisor,synchronization,selfCollision,backlash,MX106-torque14-8V,MX106-vel14-8V,MX106-damping14-8V,MX106-friction14-8V,resolution,blue1,blue2,blue3,blue4,red1,red2,red3,red4
+parameters: translation,rotation,name,controller,controllerArgs,customData,supervisor,synchronization,selfCollision,cameraWidth,cameraHeight,backlash,MX106-torque14-8V,MX106-vel14-8V,MX106-damping14-8V,MX106-friction14-8V,resolution
 tags: 
 license:  Apache License 2.0
 licenseUrl:  http://www.apache.org/licenses/LICENSE-2.0

@@ -8,6 +8,11 @@ import cv2
 from cv_bridge import CvBridge
 import running_inference_robocup as ri
 
+from vision_msgs.msg import Ball
+from vision_msgs.msg import Leftgoalpost
+from vision_msgs.msg import Rightgoalpost
+from vision_msgs.msg import Webotsmsg
+
 class Node():
 
     # Inicializando o nó
@@ -15,8 +20,11 @@ class Node():
 
         #Iniciando o nó e obtendo os arquivos que definem a rede neural
         rospy.init_node(nome_no, anonymous = True)
-        self.net, self.output_names = ri.get_cnn_files()
+        self.net = ri.get_cnn_files()
+        self.model = ri.set_model_input(self.net)
+        self.searching = True
 
+        self.publisher = rospy.Publisher('/webots_natasha/vision_inference', Webotsmsg, queue_size=100)
         self.connect_to_webots()
 
 
@@ -43,21 +51,58 @@ class Node():
         except Exception as e:
             print(f"{e}")
 
-        self.show_current_frame()
         self.send_current_frame_to_inference()
-        
-    def show_current_frame(self):
-        '''Shows the real-time feed obtained from camera on OpenCV window.'''
+
+    def send_current_frame_to_inference(self):
+        '''Sends the current frame to the inference code.'''
+        #self.binary_image = ri.create_binary_image(self.net, self.current_frame)
+
+        try:
+            self.classes, self.scores, self.boxes, self.fps = ri.detect_model(self.model, self.current_frame)
+            self.show_result_frame()
+            self.publish_results()
+        except Exception as e:
+            #print(e)
+            pass
+
+    def show_result_frame(self):
+        '''Shows the result frame obtained from neural network on OpenCV window.'''
+
+        ri.draw_results(self.current_frame, self.classes, self.scores, self.boxes)
 
         cv2.imshow("Current Frame", self.current_frame)
         cv2.waitKey(1)
 
-    def send_current_frame_to_inference(self):
-        '''Sends the current frame to the inference code.'''
-        self.binary_image = ri.create_binary_image(self.net, self.current_frame)
-        self.net = ri.set_net_input(self.net, self.binary_image)
+    def publish_results(self):
 
-        ri.forward_net(self.net, self.output_names)
+        objects_msg = Webotsmsg()
+        objects_msg.searching = self.searching
+        objects_msg.fps = self.fps
+
+        for i in range(len(self.boxes)):
+            [x_top, y_top, roi_width, roi_height] = self.boxes[i]
+
+            x = int(x_top + roi_width/2)
+            y = int(y_top + roi_height/2)
+
+            results = [True, x, y, roi_width, roi_height]
+
+            if self.classes[i][0] == 0:
+                ball = Ball()
+                [ball.found, ball.x, ball.y, ball.roi_width, ball.roi_height] = results
+                objects_msg.ball = ball
+
+            elif self.classes[i][0] == 1:
+                leftgoalpost = Leftgoalpost()
+                [leftgoalpost.found, leftgoalpost.x, leftgoalpost.y, leftgoalpost.roi_width, leftgoalpost.roi_height] = results
+                objects_msg.leftgoalpost = leftgoalpost
+
+            else:
+                rightgoalpost = Rightgoalpost()
+                [rightgoalpost.found, rightgoalpost.x, rightgoalpost.y, rightgoalpost.roi_width, rightgoalpost.roi_height] = results
+                objects_msg.rightgoalpost = rightgoalpost
+
+        self.publisher.publish(objects_msg)
         
 
 

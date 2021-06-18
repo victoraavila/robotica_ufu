@@ -5,8 +5,8 @@ from controller import Supervisor, Keyboard
 import rospy
 
 #Vetores de posição e rotação do robô no início e durante o FP
-standStillRobotTranslationStart = [0, 0.81, 0.44]
-standStillRobotRotationStart    = [0, 0, 1, -1.57]
+standStillRobotTranslationStart = [-0.80, 0.02, 0.44]
+standStillRobotRotationStart    = [0.0279, -0.972, -0.234, 0.0149]
 
 standStillRobotTranslationFP  = [0.157431, 0.411797, -0.735326]
 standStillRobotRotationFP     = [0.0368072, 0.985366, -0.166432, 2.69003]

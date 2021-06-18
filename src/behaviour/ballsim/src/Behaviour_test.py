@@ -7,7 +7,7 @@ import time
 import rospy
 import os 
 
-from vision_msgs.msg import Ball
+from vision_msgs.msg import Webotsmsg
 from pygame.locals import *
 
 pygame.init()
@@ -45,11 +45,11 @@ class Ballsim(object):
 
         ''' coord_x e coord_y são as coordenadas iniciais da imagem que iremos movimentar, onde 
             (0,0) é o canto superior esquerdo e os eixos crescem para a direita e para baixo'''
-        self.coord_x = 240
-        self.coord_y = 160
+        self.coord_x = 0
+        self.coord_y = 0
 
         #Subscrevendo o tópico da Visão
-        self.pub = rospy.Publisher('objects_sim', Ball, queue_size=100)
+        self.pub = rospy.Publisher('objects_sim', Webotsmsg, queue_size=100)
 
         self.execute()
 
@@ -131,12 +131,12 @@ class Ballsim(object):
         return self.coord_x, self.coord_y
     
     def publish(self):
-        msg = Ball()
-        msg.roi_height = self.imageHeight
-        msg.roi_width = self.imageWidth
-        msg.x = self.coord_x + int((self.imageWidth)/2) - int((self.size[0]/2))
-        msg.y = self.coord_y + int((self.imageHeight)/2) - int((self.size[1]/2))
-        msg.found = self.found
+        msg = Webotsmsg()
+        msg.ball.roi_height = self.imageHeight
+        msg.ball.roi_width = self.imageWidth
+        msg.ball.x = self.coord_x + int((self.imageWidth)/2) - int((self.size[0]/2))
+        msg.ball.y = self.coord_y + int((self.imageHeight)/2) - int((self.size[1]/2))
+        msg.ball.found = self.found
         msg.searching = True
 
         self.pub.publish(msg)

@@ -7,8 +7,8 @@
 PROTO Natasha [
   field  SFVec3f     translation     0 0 0
   field  SFRotation  rotation        0 1 0 0
-  field  SFString    name            "red player 4"  # Is `Robot.name`.
-  field  SFString    controller      "<extern>"     # Is `Robot.controller`.
+  field  SFString    name            "red player 1"  # Is `Robot.name`.
+  field  SFString    controller      "player"     # Is `Robot.controller`.
   field  MFString    controllerArgs  []         # Is `Robot.controllerArgs`.
   field  SFString    customData      ""         # Is `Robot.customData`.
   field  SFBool      supervisor      TRUE      # Is `Robot.supervisor`.
@@ -74,7 +74,7 @@ PROTO Natasha [
                   }
                 ]
                 endPoint DEF LARM_0 Solid {
-                  translation 0.131800 0.061500 0.013000
+                  translation 0.096800 0.061500 0.013000
                   rotation 0.000000 1.000000 0.000000 0.000000
                   children [
                     Natasha_LARM_0_linkMesh {
@@ -110,7 +110,7 @@ PROTO Natasha [
                               axis -1.000000 0.000000 0.000000
                               anchor -0.030700 -0.113500 -0.030800
                               dampingConstant IS MX106-damping14-8V
-                            staticFriction IS MX106-friction14-8V
+                              staticFriction IS MX106-friction14-8V
                             }
                             device [
                               RotationalMotor {
@@ -138,14 +138,37 @@ PROTO Natasha [
                                     %{ else }%
                                       Natasha_LARM_2_linkMesh{}
                               %{ end }%
+                                DEF LHAND Solid {
+                                  translation 0.03 -0.165 0
+                                  rotation 0.000000 1.000000 0.000000 0.000000
+                                  name "LHAND_link [hand]"
+                                  boundingObject Transform {
+                                    translation 0 0 0 
+                                    rotation 1.000000 -0.000000 -0.000000 1.567356
+                                    children [
+                                      Box {
+                                        size 0.01 0.01 0.01
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.000001
+                                    centerOfMass [ 0.000000 -0.000756 -0.042471 ]
+                                    inertiaMatrix [
+                                      1.833143e-04 1.985834e-04 3.813765e-04
+                                      -2.197180e-19 -2.271400e-20 3.927031e-07
+                                    ]
+                                  }
+                                }
                               ]
-                              name "LARM_2_link [hand]"
+                              name "LARM_2_link [arm]"
                               boundingObject Transform {
-                                translation 0.0301 -0.094 -0.002
+                                translation 0.0301 -0.088 -0.002
                                 rotation 1.000000 -0.000000 -0.000000 1.567356
                                 children [
                                   Box {
-                                    size 0.047 0.06 0.148
+                                    size 0.047 0.06 0.15
                                   }
                                 ]
                               }
@@ -183,7 +206,7 @@ PROTO Natasha [
                       }
                     }
                   ]
-                  name "LARM_0_link"
+                  name "LARM_0_link [shoulder]"
                   boundingObject Transform {
                     translation 0.0071 0.01 -0.00001126
                     rotation 0.576847 -0.579211 -0.575989 2.09031
@@ -203,7 +226,7 @@ PROTO Natasha [
                     ]
                   }
                 }
-              }
+            }
               HingeJointWithBacklash {
                 backlash IS backlash
                 jointParameters HingeJointParameters {
@@ -224,7 +247,7 @@ PROTO Natasha [
                   }
                 ]
                 endPoint DEF RARM_0 Solid {
-                  translation -0.131800 0.061500 0.013000
+                   translation -0.096800 0.061500 0.013000
                   rotation 0.000000 1.000000 0.000000 0.000000
                   children [
                     Natasha_RARM_0_linkMesh {
@@ -285,18 +308,40 @@ PROTO Natasha [
                                     %{ else }%
                                       Natasha_RARM_2_linkMesh{}
                                 %{ end }%
-                              %{ else }%
+                                %{ else }%
                                       Natasha_RARM_2_linkMesh{}
-                              %{ end }%
-                                    
+                                %{ end }%
+                                DEF RHAND Solid {
+                                  translation -0.03 -0.165 0
+                                  rotation 0.000000 1.000000 0.000000 0.000000
+                                  name "RHAND_link [hand]"
+                                  boundingObject Transform {
+                                    translation 0 0 0
+                                    rotation 1.000000 -0.000000 -0.000000 1.567356
+                                    children [
+                                      Box {
+                                        size 0.01 0.01 0.01
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.000001
+                                    centerOfMass [ 0.000000 -0.000756 -0.042471 ]
+                                    inertiaMatrix [
+                                      1.833143e-04 1.985834e-04 3.813765e-04
+                                      -2.197180e-19 -2.271400e-20 3.927031e-07
+                                    ]
+                                  }
+                                }
                               ]
-                              name "RARM_2_link [hand]"
+                              name "RARM_2_link [arm]"
                               boundingObject Transform {
-                                translation -0.031 -0.094 -0.002
+                                translation -0.031 -0.088 -0.002
                                 rotation 1.000000 -0.000000 -0.000000 1.567356
                                 children [
                                   Box {
-                                    size 0.047 0.06 0.148
+                                    size 0.047 0.06 0.15
                                   }
                                 ]
                               }
@@ -508,11 +553,11 @@ PROTO Natasha [
                                                 ]
                                                 name "LFOOT_link [foot]"
                                                 boundingObject Transform {
-                                                  translation 0.030700 -0.017200 0.008280
+                                                  translation 0.030700 -0.023 0.008280
                                                   rotation 0.707107 0.707107 0.000000 3.141593
                                                   children [
                                                     Box {
-                                                      size 0.014500 0.060200 0.135440
+                                                      size 0.01600 0.060200 0.135440
                                                     }
                                                   ]
                                                 }
@@ -789,11 +834,11 @@ PROTO Natasha [
                                                 ]
                                                 name "RFOOT_link [foot]"
                                                 boundingObject Transform {
-                                                  translation -0.030400 -0.017200 0.008280
+                                                  translation -0.030400 -0.023 0.008280
                                                   rotation 0.707107 0.707107 0.000000 3.141593
                                                   children [
                                                     Box {
-                                                      size 0.014500 0.060200 0.135440
+                                                      size 0.01600 0.060200 0.135440
                                                     }
                                                   ]
                                                 }

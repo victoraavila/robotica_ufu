@@ -6,18 +6,18 @@ from rospy import logerr
 
 # --------------------------------- Variáveis da Visão --------------------------------- #
 
-xTop_centralized    =  40                           #Estas quatro primeiras variáveis são
-xBottom_centralized = -40                           #limites x e y para decidir se a bola
-yTop_centralized    =  60                           #está centralizada ou não.
-yBottom_centralized = -60       
+xTop_centralized    = 240                           #Estas quatro primeiras variáveis são
+xBottom_centralized = 160                          #limites x e y para decidir se a bola
+yTop_centralized    = 290                            #está centralizada ou não.
+yBottom_centralized = 120       
 
-xTop_to_centralize    =  20                         #Estas quatro variáveis irão informar
-xBottom_to_centralize = -20                         #os valores para centralizar a cabeça
-yTop_to_centralize    = -30                         #com a bola.
-yBottom_to_centralize =  30
+xTop_to_centralize    = 220                         #Estas quatro variáveis irão informar
+xBottom_to_centralize = 180                         #os valores para centralizar a cabeça
+yTop_to_centralize    = 270                         #com a bola.
+yBottom_to_centralize = 140
 
-ball_width  = 200                                   #Variáveis para nos informar a altura
-ball_height = 200                                   #e largura do raio da bola. Define se
+ball_width  = 75                                   #Variáveis para nos informar a altura
+ball_height = 75                                   #e largura do raio da bola. Define se
                                                     #a bola está perto ou longe.
 
 # ------------------------------- Variáveis do Sensor ---------------------------------- #
@@ -62,13 +62,12 @@ class Think(object):
                 elif x_ball < xBottom_to_centralize:
                     self.motorhead = -1 #Mover para a esquerda
 
-                if y_ball < yTop_to_centralize:
-                    self.motorhead = -2 #Mover para cima
-
-                elif y_ball > yBottom_to_centralize:
+                if y_ball > yTop_to_centralize:
                     self.motorhead = 2 #Mover para baixo
+                elif y_ball < yBottom_to_centralize:
+                    self.motorhead = -2 #Mover para cima
      
-        if roi_width >= ball_width and roi_height >= ball_height:
+        if roi_width*roi_height >= ball_height*ball_width:
             self.ball_close = True
 
         return (self.ball_centered, self.ball_close, self.motorhead)

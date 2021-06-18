@@ -1,18 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import goalie
 import thinkGoalie
+import yamlTransition 
+
 import time
 import rospy
-#import yamlTransition 
+
+from geometry_msgs.msg import Vector3
 from sensor_msgs.msg import *
-from vision_msgs.msg import Objects
+from vision_msgs.msg import Webotsmsg
 from behaviour_msgs.msg import StateMachineActionsMsg
 from behaviour_msgs.srv import *
 from movement_msgs.srv import *
 from movement_msgs.msg import *
-
 
 """
 Definições estabelecidas na criação desse código do behavior:
@@ -27,90 +29,102 @@ Definições estabelecidas na criação desse código do behavior:
     - As variaveis SEMPRE serão passadas para a maquina de estados dentro do método update_state_machine.
 """
 
+# ----------------------- Constantes de Alinhamento do Corpo ----------------------- #                      #Estas três constantes são as
+demand_to_turn_left = "virar esquerda"                  #strings a serem passadas ao
+demand_to_turn_right = "virar direita"                  #service do yamlTransition.py,
+                                                        #relativas à chamada de parâmetros
+                                                        #de alinhamento do corpo.
+
+angular_velocity = 0.2 #rad/s                                                        
+turn_90_degrees_time = 1.57079/angular_velocity                                                       
 class Brain():
 
     def __init__(self):
-        self.game_controller = False
+        self.moving = False
 
+        # Variaveis para serem mandadas para a cabeça
+        self.neck_horizontal_position = -1
+        self.neck_vertical_position = -1
+        self.motor_limit_reached = False
+
+        # Variaveis para a visão
+        self.ball_position = 3
         self.searching = False
         self.ball = False
         self.ball_close = False
         self.x_ball = -1
+        self.y_ball = -1
         self.roi_width = -1
         self.roi_height = -1
-        self.defend_side = ''
 
+        # Variáveis dos sensores do movimento
         self.sensor = False
         self.falled = False 
         self.position_falled = ''
         self.x_sensor = 0.0
         self.y_sensor = 0.0
         self.z_sensor = 0.0
-        
+
+        # Variáveis das pages do movimento 
         self.page = ''
         self.current_page = ''
         self.before_page = None
         self.feedback_page = ''
         self.finished_page = 'finished'
-        self.walk_flag = False
+
+        # Variáveis referentes a caminhada do movimento 
+        self.test_mode = False
         self.wState = 0
         self.old_wState = 10
         self.walk_counter = 0
         self.period_counter = 0
         self.before_walk_counter = 0
-        self.steps_number = 10
+        self.steps_number = 50
         self.walking = ''
         self.vx = 0.0
         self.vy = 0.0
         self.vz = 0.0
-        self.robot_position = ''
+        self.walk_flag = False
+        self.move_head = False
+        self.first_pose = False
         self.finish_kicking = False
-        
+
+        # Variáveis para o fluxo do behaviour
         self.before_state = ''
         self.actual_state = ''
         self.robot = goalie.Goalie()
         self.thoughts = thinkGoalie.Think()
 
+        # Inicializador do node do behaviour
         rospy.init_node('Behaviour_Node', anonymous=True)
-        
-    def callback_vision(self, msg): #Acionado toda vez que uma mensagem da Visão chega
 
-        self.searching = msg.ball.searching
+    # Metodo para a visão na robo física    
+    def callback_vision(self, msg): # Acionado toda vez que uma mensagem da Visão chega
+
+        self.searching = msg.searching
         self.ball = msg.ball.found
-        self.x_ball = msg.ball.x #Coordenada horizontal da bola
+        self.x_ball = msg.ball.x # Coordenada horizontal da bola
+        self.y_ball = msg.ball.y # Coordenada vertical da bola
         self.roi_width = msg.ball.roi_width
         self.roi_height = msg.ball.roi_height
 
-        self.ball_close, self.defend_side = self.thoughts.vision(self.x_ball, self.roi_width, self.roi_height, self.ball)
+        self.ball_close, self.ball_position = self.thoughts.vision(self.x_ball, self.y_ball, self.roi_width, self.roi_height, self.ball)
         
         self.update_state_machine()
 
-    '''
-    def callback_test(self, msg):
-        self.robot.falling = msg.falling
-        self.robot.finish_kicking = msg.finish_kicking 
-        self.robot.searching = msg.searching 
-        self.robot.ball = msg.ball 
-        self.robot.ball_close = msg.ball_close
-        self.robot.ball_centered = msg.ball_centered
-        self.robot.moving = msg.moving 
-        self.robot.game_controller = msg.game_controller 
-        self.robot.getting_up = msg.getting_up 
-        self.robot.impossible = msg.impossible
-    '''
-    '''def callback_not_walking(self, msg):
+    # Metodo para a visão na robo simulada
+    def callback_vision_sim(self, msg): # Acionado toda vez que uma mensagem da Visão chega
 
-        self.walking = msg.source
+        self.searching = msg.searching
+        self.ball = msg.ball.found
+        self.x_ball = msg.ball.x # Coordenada horizontal da bola
+        self.y_ball = msg.ball.y # Coordenada vertical da bola
+        self.roi_width = msg.ball.roi_width
+        self.roi_height = msg.ball.roi_height
 
+        self.ball_close, self.ball_position = self.thoughts.vision(self.x_ball, self.y_ball, self.roi_width, self.roi_height, self.ball)
+        
         self.update_state_machine()
-
-    def callback_head(self, msg):
-
-        self.position_motor18 = msg.data[19]
-
-        self.robot_position = self.thoughts.movement(self.position_motor18)
-
-        self.update_state_machine()'''
 
     def callback_pages(self, msg):
         # Saber quando a page acabou
@@ -121,7 +135,7 @@ class Brain():
 
         self.update_state_machine()
 
-    '''def callback_ground(self, msg):
+    def callback_ground(self, msg):
         # Saber quando os pés estão no chão
 
         self.wState = msg.wState
@@ -133,44 +147,33 @@ class Brain():
 
         self.update_state_machine()
 
-    def walk_service(self, msg):
-
-        self.walk_flag = msg
-
+    def walk_service(self, first_pose, move_head, walk_flag, test_mode):
+        
         rospy.wait_for_service('/humanoid_walking/walking_cmd')
 
         try:
 
             service_walk = rospy.ServiceProxy('/humanoid_walking/walking_cmd', LipCmdSrv)
 
-            service_walk(msg, False, self.vx, self.vy, self.vz)
+            service_walk(first_pose, move_head, walk_flag, False, test_mode, self.vx, self.vy, self.vz)
 
         except rospy.ServiceException as e:
 
-            print("Service call failed: %s"%e)
+            print("Service call failed: {e}")
     
     def callback_walking(self,msg):
-
         self.walk_flag = msg.walk_flag
+        self.test_mode = msg.test_mode
         self.vx = msg.vx
         self.vy = msg.vy
-        self.vz = msg.vz'''
+        self.vz = msg.vz
 
     def callback_sensor(self, msg):
         #pegar valores pertinentes do sensor IMU 
 
-        self.x_sensor = msg.orientation.x
-        self.y_sensor = msg.orientation.y
-        self.z_sensor = msg.orientation.z
-                
-        # Códigos abaixo irão ser comentados por falta de real necessidade, caso queira utilizar, por favor adicionar no construtor        
-        #self.x_linear_acceleration = msg.linear_acceleration.x
-        #self.y_linear_acceleration = msg.linear_acceleration.y
-        #self.z_linear_acceleration = msg.linear_acceleration.z
-                
-        #self.x_angular_velocity = msg.angular_velocity.x
-        #self.y_angular_velocity = msg.angular_velocity.y
-        #self.z_angular_velocity = msg.angular_velocity.z
+        self.x_sensor = msg.x
+        self.y_sensor = msg.y
+        self.z_sensor = msg.z
 
         self.falled = self.thoughts.sensor_think(self.x_sensor, self.y_sensor, self.z_sensor)
 
@@ -184,9 +187,8 @@ class Brain():
         try:
             if not (self.current_page == self.before_page):
 
-                service_client_page = rospy.ServiceProxy('/humanoid_qt/movecreator_qt/page', service_page)
+                service_client_page = rospy.ServiceProxy('/humanoid_qt/movecreator_qt/page', MovementSrv)
 
-                #service_client_page(string)
                 resp = service_client_page(string)
                 print(resp.confirmation)
 
@@ -194,30 +196,28 @@ class Brain():
 
         except rospy.ServiceException as e:
 
-          print("Service call failed: %s"%e)
+          print("Service call failed: {e}")
 
-    '''def call_params(self, string):
-
-        rospy.wait_for_service('state_machine/yamlTransition')
+    def call_params(self, string):
 
         try:
+
+            rospy.wait_for_service('state_machine/yamlTransition')
 
             service_client_page = rospy.ServiceProxy('state_machine/yamlTransition', yamlTransitionSrv)
 
             #service_client_page(string)
             resp = service_client_page(string)
-            print (resp.confirmation)
+            print(resp.confirmation)
             
             self.current_page = 'fake_page'
 
         except rospy.ServiceException as e:
 
-          print ("Service call failed: %s"%e)'''
+          print ("Service call failed: {e}")
 
+    # Método destinado a repassar as variveis para a máquina de estados
     def update_state_machine(self):
-    # Método destina a repassar as variveis para a máquina de estados
-
-        #self.robot.game_controller = True
 
         # Visão
         self.robot.ball = self.ball
@@ -225,132 +225,144 @@ class Brain():
         self.robot.ball_close = self.ball_close
 
         # Movimento
+        self.robot.moving = self.moving
         self.robot.falling = self.falled
-        self.robot.finish_kicking = self.finish_kicking
-
-    def run_movement(self):
 
     # Método responsavel por passar comandos ao movimento
+    def run_movement(self):
             
-        if self.robot.state == 'Getting_up':
-            #movimento desligar motores momentos antes de a robô realmente cair
-            time.sleep(1) #esperar um pouco para garantir que ela caiu
-            self.position_falled = self.thoughts.falled_position(self.x_sensor, self.y_sensor) #verificar a posição que a robo caiu 
+        if self.robot.state == 'S_Getting_up' or self.robot.state == 'S_Repositioning':
+            # Movimento desligar motores momentos antes de a robô realmente cair
+            self.moving = False
 
             print (self.robot.state)
 
-            self.pub = rospy.Publisher('opencm/request', OpencmRequestMsg)
-            fallMsg = OpencmRequestMsg()
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+            
+            '''Publicação no tópico para desligar os motores, passar para um lugar que faça isso mais rápido.'''
+            """ fallMsg = OpencmRequestMsg()
             fallMsg.commandRead = 'shutdown_now'
-            self.pub.publish(fallMsg)
+            self.pub_cm_request.publish(fallMsg) """
 
-            if self.finished_page == 'finished':
-                fallMsg.commandRead = 'reborn'
-                self.pub.publish(fallMsg)                
+            time.sleep(1) # Esperar um pouco para garantir que ela caiu
+            self.position_falled = self.thoughts.falled_position(self.x_sensor, self.y_sensor, self.z_sensor) #verificar a posição que a robo caiu 
+            print (self.x_sensor, self.y_sensor)
+            print (self.position_falled) 
+
+            if self.walking == 'not_walking' or self.finished_page == 'finished':
+                """ fallMsg.commandRead = 'reborn'
+                self.pub_cm_request.publish(fallMsg) """                
 
                 if self.position_falled == 'front':
-                    self.call_page('page_levantar_frente5')
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+                    self.call_page('stand_up_front')
             
                 elif self.position_falled == 'back':
-                    self.call_page('page_levantar_no_beck')
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+                    self.call_page('stand_up_back')
                 
                 elif self.position_falled == 'left_side':
-                    self.call_page('page_levantar_ladinho_esquerdo')
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+                    self.call_page('stand_up_front')
                 
                 elif self.position_falled == 'right_side':
-                    self.call_page('page_levantar_ladinho_direito')
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+                    self.call_page('stand_up_front')
 
+                if self.robot.state == 'S_Repositioning':
+                    if self.pageToCall == 'page_right_defense':
+                        self.call_params(demand_to_turn_left)
+                        print('Girando pra esquerda')
+
+                    elif self.pageToCall == 'left_defense':
+                        self.call_params(demand_to_turn_right)
+                        print('Girando pra direita')
+
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
+                    time.sleep(turn_90_degrees_time)
+                    self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+
+            elif self.finished_page == 'finished':
                 self.falled = False
                 self.update_state_machine()
+                
+            '''
+            1- Mandar 'shutdown' para desligar os motores; -> Executa até o final do tópico, sem realizar ação de motor
+            2- Esperar 'Last_Page';
+            3- Mandar 'reborn' para religar os motores;
+            4- Getting_up analisa e manda page pro movimento;
 
+            PREMONIÇÃO- Fazer posição intermediária;
+            '''
             
-        if (self.robot.state == 'Defend') and (self.finished_page == 'finished'):
+        elif (self.robot.state == 'S_Defend' and self.finished_page == 'finished'):
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+            if self.ball_position == 1:
+                self.pageToCall = 'central_defense'
+            elif self.ball_position == -1:
+                self.pageToCall = 'left_defense'
+            else:
+                self.pageToCall = 'central_defense'
 
-            if self.defend_side == 'keep_position':
-                #mandar comando para defender no centro
-
-                self.call_page('central_defense')
-                print('Defesa central')
-                
-                self.update_state_machine()
-
-            elif self.defend_side == 'defend_left':
-                #mandar comando para defender para a esquerda
-                
-                self.call_page('left_defense')
-                print('Defesa para a esquerda')
-
-                self.update_state_machine()
-
-            elif self.defend_side == 'defend_right':
-                #mandar comando para defender para a direita
-
-                self.call_page('right_defense')
-                print('Defesa para a direita')
-
-                self.update_state_machine()
-       
-        elif (self.robot.state == 'Stand_still') and (self.finished_page == 'finished'):
-            #self.walk_service(False)
-            self.call_page('page_stand_shield')
-            self.update_state_machine()
-
-        elif (self.robot.state == 'Search_ball') and (self.finished_page == 'finished'):
-            self.call_page('squat')
-            self.update_state_machine()
-            
-    
-            '''if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
-                self.walk_service(False)
-                self.moving = False
-                self.robot.state = 'Search_ball'
-                print('Mandei Walk_flag falso')
-                self.update_state_machine()'''
-                
-        '''elif (self.robot.state == 'Kick' and self.finished_page == 'finished'):
-            self.walk_service(False)
-            self.call_page('page_kick')
+            self.call_page(self.pageToCall)
             #self.finish_kicking = True
-            self.update_state_machine()'''
+            self.update_state_machine()
 
+        elif (self.robot.state == 'S_Stand_still' and self.finished_page == 'finished'):
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+            if(self.before_state != self.robot.state):
+                self.call_page('squat')
+            self.update_state_machine()
+ 
     def start(self):
 
-        rospy.Subscriber('objects', Objects, self.callback_vision) #Subscrição precisa ser feita apenas uma vez
+        rospy.Subscriber('/webots_natasha/vision_inference', Webotsmsg, self.callback_vision) #Subscrição precisa ser feita apenas uma vez
+        #rospy.Subscriber('objects_sim', Webotsmsg, self.callback_vision_sim)
         #rospy.Subscriber('robot_actions', StateMachineActionsMsg, self.callback_test)
-        rospy.Subscriber('/humanoid_control/imu_euler', Imu, self.callback_sensor)
+        rospy.Subscriber('/webots_natasha/behaviour_controller', Vector3, self.callback_sensor)
         rospy.Subscriber('/humanoid_model/jointState', JointStateMsg, self.callback_pages)
-        #rospy.Subscriber('/humanoid_walking/lipFeedback', LipFeedBack, self.callback_ground)
-        #rospy.Subscriber('/humanoid_walking/walking_params_state', LipParamsMsg, self.callback_walking)
-        #rospy.Subscriber('/opencm/request', OpencmRequestMsg, self.callback_not_walking)
-
+        rospy.Subscriber('/humanoid_walking/lipFeedback', LipFeedBack, self.callback_ground)
+        rospy.Subscriber('/humanoid_walking/walking_params_state', LipParamsMsg, self.callback_walking)
+       
         self.robot.game_controller = True
 
-        #self.walk_service(True)
-        self.call_page('Sento_no_bico_da_glock')
-        #self.call_params('andar reto')
-        #self.robot_position = 'turn_left'
-        #self.run_movement()
         self.update_state_machine() # Método para atualizar a máquina de estados
+        
+        self.test_mode = True
+        self.first_pose = False
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+        
+        time.sleep(10)
+
+        self.first_pose = True
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+
+        time.sleep(10)
+
+        self.first_pose = False
+        self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
         print (self.robot.state)
 
+        # Loop que mantém o Behaviour em execução
         while not rospy.is_shutdown():
 
             self.robot.clock()
-            time.sleep(2)
+            # time.sleep(0.1)
             
             self.actual_state = self.robot.state
-
+            
             print ("Pagina: ", self.finished_page)
-            '''print("Periodos: ", self.period_counter)
+            print ("position: ", self.ball_position)
+            print("Periodos: ", self.period_counter)
             print ("Passos: ", self.walk_counter)
             print("Passos anteriores: ", self.before_walk_counter)
-            print("Walk_flag: ", self.walk_flag)'''
+            print("Walk_flag: ", self.walk_flag)
+            
             self.run_movement()
-
             self.before_state = self.robot.state
 
     
 if __name__ == '__main__':
-    cerebro = Brain() #inicia o construtor da classe
-    cerebro.start() #roda o método start
+    cerebro = Brain() # Inicia o construtor da classe
+    cerebro.start() # Roda o método start
     rospy.spin()

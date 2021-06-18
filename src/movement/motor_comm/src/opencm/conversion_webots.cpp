@@ -28,17 +28,37 @@ class Converter
     void convertToWebots(std::vector<int> data)
     {  
         std::vector<float> radPosition(20,0);
+        std::vector<std::string> motorNames {"RARM_0 [shoulder]", "LARM_0 [shoulder]", 
+                                             "RARM_1", "LARM_1", 
+                                             "LARM_2", "RARM_2",
+                                             "RLEG_0", "LLEG_0",
+                                             "RLEG_1 [hip]", "LLEG_1 [hip]",
+                                             "RLEG_2", "LLEG_2",
+                                             "RLEG_3", "LLEG_3",
+                                             "RLEG_4", "LLEG_4", 
+                                             "RFOOT", "LFOOT",
+                                             "HEAD_0", "HEAD_1"};
+
         int countZeros = 0;
 
         radPosition.clear();
 
-        for(int i=0; i<20; i++){
+        for(int i=0; i<20; i++)
+        {
+            if (data[i] <= 0)
+            {
+                data[i] = 2048;
+            }
             radPosition.push_back((data[i] - MOTORREF)/RAD2MOTOR);
             convertedMsg.position[i] = radPosition[i];
-            if (data[i] == 0)
-            {
-                countZeros += 1;
-            }
+            if (i > 17)
+                convertedMsg.velocity[i] = 0.5;
+
+            else 
+                convertedMsg.velocity[i] = 2;
+                
+            std::cout << motorNames[i] << "\n";
+            convertedMsg.motor_name[i] = motorNames[i];
         }
         if (countZeros >= 12)
         {

@@ -8,7 +8,7 @@ PROTO Natasha_LFOOT_linkMesh [
 ]
 {
   Shape {
-    appearance NatashaPaintedDefault{}
+    appearance NatashaPaintedBlack{}
     geometry DEF LFOOT_link IndexedFaceSet {
       coord Coordinate {
         point [

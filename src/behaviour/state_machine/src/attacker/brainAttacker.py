@@ -8,7 +8,7 @@ import rospy
 import yamlTransition 
 from geometry_msgs.msg import Vector3
 from sensor_msgs.msg import *
-from vision_msgs.msg import Objects, Ball
+from vision_msgs.msg import Webotsmsg as WebotsVisionMsg, Ball
 from behaviour_msgs.msg import StateMachineActionsMsg
 from behaviour_msgs.srv import *
 from movement_msgs.srv import *
@@ -102,7 +102,7 @@ class Brain():
     # Metodo para a visão na robo física    
     def callback_vision(self, msg): # Acionado toda vez que uma mensagem da Visão chega
 
-        self.searching = msg.ball.searching
+        self.searching = msg.searching
         self.ball = msg.ball.found
         self.x_ball = msg.ball.x # Coordenada horizontal da bola
         self.y_ball = msg.ball.y # Coordenada vertical da bola
@@ -170,7 +170,7 @@ class Brain():
 
         except rospy.ServiceException as e:
 
-            print(f"Service call failed: {e}")
+            print("Service call failed: {e}")
     
     def callback_walking(self,msg):
         self.walk_flag = msg.walk_flag
@@ -356,7 +356,6 @@ class Brain():
 
         elif (self.robot.state == 'S_Stand_still' and self.finished_page == 'finished'):
             self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-            self.call_page('page_stand_shield')
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Search_ball' and self.finished_page == 'finished'):
@@ -399,8 +398,8 @@ class Brain():
  
     def start(self):
 
-        #rospy.Subscriber('objects', Objects, self.callback_vision) #Subscrição precisa ser feita apenas uma vez
-        rospy.Subscriber('objects_sim', Ball, self.callback_vision_sim)
+        rospy.Subscriber('/webots_natasha/vision_inference', WebotsVisionMsg, self.callback_vision) #Subscrição precisa ser feita apenas uma vez
+        #rospy.Subscriber('objects_sim', Ball, self.callback_vision_sim)
         #rospy.Subscriber('robot_actions', StateMachineActionsMsg, self.callback_test)
         rospy.Subscriber('/webots_natasha/behaviour_controller', Vector3, self.callback_sensor)
         rospy.Subscriber('/opencm/request', OpencmRequestMsg, self.callback_head)

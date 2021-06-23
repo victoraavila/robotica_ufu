@@ -1,0 +1,16 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~testTime" : \b [double] Test time min: 0.0, default: 10.0, max: 60.0
+- \b "~ampXRange" : \b [double] ampXRange min: 0.01, default: 1.0, max: 10.0
+- \b "~ampYRange" : \b [double] ampYRange min: 0.01, default: 1.0, max: 10.0
+- \b "~ampZRange" : \b [double] ampZRange min: 0.01, default: 1.0, max: 10.0
+- \b "~meanXRange" : \b [double] meanXRange min: 0.01, default: 3.0, max: 10.0
+- \b "~meanYRange" : \b [double] meanYRange min: 0.01, default: 3.0, max: 10.0
+- \b "~meanZRange" : \b [double] meanZRange min: 0.01, default: 30.0, max: 30.0
+- \b "~wFreq" : \b [double] wFreq min: 0.0, default: 0.0, max: 10.0
+- \b "~wAmp" : \b [double] wAmp min: 0.0, default: 0.0, max: 10.0
+- \b "~wMean" : \b [double] wMean min: 0.0, default: 1.0, max: 10.0
+- \b "~test" : \b [bool] TEST min: False, default: False, max: True
+

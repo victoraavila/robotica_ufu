@@ -1,0 +1,13 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~vx" : \b [double] VX min: -1.0, default: 0.0, max: 1.0
+- \b "~vy" : \b [double] VY min: -1.0, default: 0.0, max: 1.0
+- \b "~vz" : \b [double] VZ min: -90.0, default: 0.0, max: 90.0
+- \b "~slope" : \b [double] Slope min: -20.0, default: 0.0, max: 20.0
+- \b "~first_pose" : \b [bool] First_Pose min: False, default: False, max: True
+- \b "~move_head" : \b [bool] Move_Head min: False, default: False, max: True
+- \b "~walk_flag" : \b [bool] Walk min: False, default: False, max: True
+- \b "~test_mode" : \b [bool] Test_Mode min: False, default: False, max: True
+

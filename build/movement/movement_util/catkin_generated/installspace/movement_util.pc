@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/install
+
+Name: movement_util
+Description: Description of movement_util
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lmovement_util
+Requires: roscpp

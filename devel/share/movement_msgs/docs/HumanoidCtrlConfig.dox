@@ -1,0 +1,28 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~dt" : \b [double] DT min: 0.001, default: 0.07, max: 0.5
+- \b "~kpUpperBody" : \b [double] KP UPPER BODY min: 1.0, default: 850.0, max: 3000.0
+- \b "~kpHipRoll" : \b [double] KP HIP ROLL min: 1.0, default: 850.0, max: 3000.0
+- \b "~kpHipPitch" : \b [double] KP HIP PITCH min: 1.0, default: 850.0, max: 3000.0
+- \b "~kpKneePitch" : \b [double] KP KNEE PITCH min: 1.0, default: 850.0, max: 3000.0
+- \b "~kpFootPitch" : \b [double] KP FOOT PITCH min: 1.0, default: 850.0, max: 3000.0
+- \b "~kpFootRoll" : \b [double] KP FOOT ROLL min: 1.0, default: 850.0, max: 3000.0
+- \b "~torsoKp" : \b [double] TORSO KP min: -1.0, default: 0.0, max: 1.0
+- \b "~torsoKi" : \b [double] TORSO KI min: 0.0, default: 0.0, max: 1.0
+- \b "~torsoKd" : \b [double] TORSO KD min: 0.0, default: 0.0, max: 1.0
+- \b "~armKp" : \b [double] TORSO KP min: 0.0, default: 0.0, max: 2.0
+- \b "~armKi" : \b [double] TORSO KI min: 0.0, default: 0.0, max: 2.0
+- \b "~armKd" : \b [double] TORSO KD min: 0.0, default: 0.0, max: 2.0
+- \b "~phaseKp" : \b [double] PHASE KP min: 0.0, default: 0.0, max: 2.0
+- \b "~phaseKi" : \b [double] PHASE KI min: 0.0, default: 0.0, max: 2.0
+- \b "~phaseKd" : \b [double] PHASE KD min: 0.0, default: 0.0, max: 2.0
+- \b "~phaseRef" : \b [double] PHASE REF min: 1.0, default: 1.0, max: 30.0
+- \b "~phase_ctrl_flag" : \b [bool]  PHASE Control Flag min: False, default: False, max: True
+- \b "~arm_ctrl_flag" : \b [bool]  ARM Control Flag min: False, default: False, max: True
+- \b "~torso_ctrl_flag" : \b [bool] TORSO Control Flag min: False, default: False, max: True
+- \b "~slope_ctrl_flag" : \b [bool] SLOPE Control Flag min: False, default: False, max: True
+- \b "~foot_ctrl_flag" : \b [bool] FOOT Control Flag min: False, default: False, max: True
+- \b "~ctrl_flag" : \b [bool] Control Flag min: False, default: False, max: True
+

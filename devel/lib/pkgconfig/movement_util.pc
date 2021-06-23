@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/devel
+
+Name: movement_util
+Description: Description of movement_util
+Version: 0.0.0
+Cflags: -I/robotica_ufu/src/movement/movement_util/include
+Libs: -L${prefix}/lib -lmovement_util
+Requires: roscpp

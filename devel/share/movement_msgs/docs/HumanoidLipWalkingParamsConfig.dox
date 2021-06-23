@@ -1,0 +1,15 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~dt" : \b [double] Update Time min: 0.001, default: 0.07, max: 0.1
+- \b "~lip_dt" : \b [double] Update Lip Time min: 0.001, default: 0.005, max: 0.1
+- \b "~tS" : \b [double] Time for Single Support min: 0.1, default: 0.3, max: 2.0
+- \b "~tD" : \b [double] Time for Double Support min: 0.0, default: 0.1, max: 1.0
+- \b "~stepH" : \b [double] Step Height min: 0.0, default: 0.05, max: 0.1
+- \b "~zCCorr" : \b [double] Correction for the COM Height min: 0.1, default: 1.0, max: 3.0
+- \b "~sinFreq" : \b [double] Sin Freq min: 0.0, default: 1.0, max: 10.0
+- \b "~sinAmp" : \b [double] Sin Amplitude min: -15.0, default: 0.0, max: 15.0
+- \b "~sinPhase" : \b [double] Sin Phase min: -1.0, default: 0.0, max: 1.0
+- \b "~curve" : \b [int] The type of curve min: 0, default: 1, max: 2
+

@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/install
+
+Name: humanoid_walking
+Description: Description of humanoid_walking
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lhumanoid_walking
+Requires: roscpp std_msgs movement_msgs movement_util message_filters eigen_conversions

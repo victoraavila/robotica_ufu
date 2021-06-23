@@ -1,0 +1,22 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~dt" : \b [double] Update Time min: 0.001, default: 0.07, max: 1.0
+- \b "~squat" : \b [double] Squat min: 0.0, default: 0.0, max: 0.3
+- \b "~open" : \b [double] Open min: 0.0, default: 0.0, max: 0.3
+- \b "~incl" : \b [double] Incl min: -90.0, default: 0.0, max: 90.0
+- \b "~sideIncl" : \b [double] Side Incl min: -90.0, default: 0.0, max: 90.0
+- \b "~footIncl" : \b [double] footIncl min: -40.0, default: 0.0, max: 40.0
+- \b "~comX" : \b [double] comX min: -0.3, default: 0.0, max: 0.3
+- \b "~comY" : \b [double] comY min: -0.3, default: 0.0, max: 0.3
+- \b "~comZ" : \b [double] comZ min: 0.0, default: 0.0, max: 0.6
+- \b "~arm0" : \b [double] ARM ANGLE 0 min: -90.0, default: 0.0, max: 90.0
+- \b "~arm1" : \b [double] ARM ANGLE 1 min: 0.0, default: 0.0, max: 90.0
+- \b "~arm2" : \b [double] ARM ANGLE 2 min: -90.0, default: 0.0, max: 90.0
+- \b "~calcIK" : \b [bool] Inverse Kinematics min: False, default: False, max: True
+- \b "~calcFK" : \b [bool] Forward Kinematics min: False, default: False, max: True
+- \b "~calcInvDyn" : \b [bool] Inverse Dynamics min: False, default: False, max: True
+- \b "~calcZMP" : \b [bool] Calculate ZMP min: False, default: False, max: True
+- \b "~calcCOM" : \b [bool] Calculate COM min: False, default: False, max: True
+

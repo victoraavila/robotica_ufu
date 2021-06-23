@@ -1,0 +1,14 @@
+\subsubsection usage Usage
+\verbatim
+<node name="movement_msgs" pkg="movement_msgs" type="movement_msgs">
+  <param name="vx" type="double" value="0.0" />
+  <param name="vy" type="double" value="0.0" />
+  <param name="vz" type="double" value="0.0" />
+  <param name="slope" type="double" value="0.0" />
+  <param name="first_pose" type="bool" value="False" />
+  <param name="move_head" type="bool" value="False" />
+  <param name="walk_flag" type="bool" value="False" />
+  <param name="test_mode" type="bool" value="False" />
+</node>
+\endverbatim
+

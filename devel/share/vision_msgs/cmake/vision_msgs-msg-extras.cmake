@@ -1,0 +1,2 @@
+set(vision_msgs_MESSAGE_FILES "/robotica_ufu/src/vision/vision_msgs/msg/Objects.msg;/robotica_ufu/src/vision/vision_msgs/msg/Ball.msg;/robotica_ufu/src/vision/vision_msgs/msg/Goal.msg;/robotica_ufu/src/vision/vision_msgs/msg/Robot.msg;/robotica_ufu/src/vision/vision_msgs/msg/Leftgoalpost.msg;/robotica_ufu/src/vision/vision_msgs/msg/Rightgoalpost.msg;/robotica_ufu/src/vision/vision_msgs/msg/Webotsmsg.msg")
+set(vision_msgs_SERVICE_FILES "")

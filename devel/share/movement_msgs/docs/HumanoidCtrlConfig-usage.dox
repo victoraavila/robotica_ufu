@@ -1,0 +1,29 @@
+\subsubsection usage Usage
+\verbatim
+<node name="movement_msgs" pkg="movement_msgs" type="movement_msgs">
+  <param name="dt" type="double" value="0.07" />
+  <param name="kpUpperBody" type="double" value="850.0" />
+  <param name="kpHipRoll" type="double" value="850.0" />
+  <param name="kpHipPitch" type="double" value="850.0" />
+  <param name="kpKneePitch" type="double" value="850.0" />
+  <param name="kpFootPitch" type="double" value="850.0" />
+  <param name="kpFootRoll" type="double" value="850.0" />
+  <param name="torsoKp" type="double" value="0.0" />
+  <param name="torsoKi" type="double" value="0.0" />
+  <param name="torsoKd" type="double" value="0.0" />
+  <param name="armKp" type="double" value="0.0" />
+  <param name="armKi" type="double" value="0.0" />
+  <param name="armKd" type="double" value="0.0" />
+  <param name="phaseKp" type="double" value="0.0" />
+  <param name="phaseKi" type="double" value="0.0" />
+  <param name="phaseKd" type="double" value="0.0" />
+  <param name="phaseRef" type="double" value="1.0" />
+  <param name="phase_ctrl_flag" type="bool" value="False" />
+  <param name="arm_ctrl_flag" type="bool" value="False" />
+  <param name="torso_ctrl_flag" type="bool" value="False" />
+  <param name="slope_ctrl_flag" type="bool" value="False" />
+  <param name="foot_ctrl_flag" type="bool" value="False" />
+  <param name="ctrl_flag" type="bool" value="False" />
+</node>
+\endverbatim
+

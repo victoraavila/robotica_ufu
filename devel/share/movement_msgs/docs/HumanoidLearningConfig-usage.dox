@@ -1,0 +1,17 @@
+\subsubsection usage Usage
+\verbatim
+<node name="movement_msgs" pkg="movement_msgs" type="movement_msgs">
+  <param name="testTime" type="double" value="10.0" />
+  <param name="ampXRange" type="double" value="1.0" />
+  <param name="ampYRange" type="double" value="1.0" />
+  <param name="ampZRange" type="double" value="1.0" />
+  <param name="meanXRange" type="double" value="3.0" />
+  <param name="meanYRange" type="double" value="3.0" />
+  <param name="meanZRange" type="double" value="30.0" />
+  <param name="wFreq" type="double" value="0.0" />
+  <param name="wAmp" type="double" value="0.0" />
+  <param name="wMean" type="double" value="1.0" />
+  <param name="test" type="bool" value="False" />
+</node>
+\endverbatim
+

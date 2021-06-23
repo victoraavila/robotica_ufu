@@ -1,0 +1,13 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~dt" : \b [double] Update Time min: 0.001, default: 0.07, max: 2.0
+- \b "~toRobot" : \b [bool] Send to Robot min: False, default: False, max: True
+- \b "~toGazebo" : \b [bool] Send to Gazebo min: False, default: False, max: True
+- \b "~send2Motor" : \b [bool] Send to Motor min: False, default: True, max: True
+- \b "~pingAll" : \b [bool] PING ALL min: False, default: False, max: True
+- \b "~testDT" : \b [bool] TEST DT min: False, default: False, max: True
+- \b "~readMotor" : \b [bool] Read From Motor min: False, default: False, max: True
+- \b "~readParam" : \b [int] READ PARAM min: 0, default: 0, max: 5
+

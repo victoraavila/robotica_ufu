@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/devel
+
+Name: sakura_control
+Description: Description of sakura_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

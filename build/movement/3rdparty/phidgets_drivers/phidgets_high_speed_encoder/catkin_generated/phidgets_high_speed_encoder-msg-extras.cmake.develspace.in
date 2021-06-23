@@ -1,0 +1,2 @@
+set(phidgets_high_speed_encoder_MESSAGE_FILES "/robotica_ufu/src/movement/3rdparty/phidgets_drivers/phidgets_high_speed_encoder/msg/EncoderDecimatedSpeed.msg")
+set(phidgets_high_speed_encoder_SERVICE_FILES "")

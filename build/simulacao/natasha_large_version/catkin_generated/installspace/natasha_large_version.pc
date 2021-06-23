@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/install
+
+Name: natasha_large_version
+Description: Description of natasha_large_version
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

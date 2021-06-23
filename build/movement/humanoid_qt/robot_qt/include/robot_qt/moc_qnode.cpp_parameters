@@ -1,0 +1,14 @@
+-I/robotica_ufu/devel/include
+-I/robotica_ufu/src/movement/movement_util/include
+-I/opt/ros/noetic/include
+-I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp
+-I/usr/include
+-I/robotica_ufu/src/movement/humanoid_qt/robot_qt
+-I/robotica_ufu/build/movement/humanoid_qt/robot_qt
+-DROS_BUILD_SHARED_LIBS=1
+-DROS_BUILD_SHARED_LIBS=1
+-DROS_PACKAGE_NAME="humanoid_qt"
+-DROSCONSOLE_BACKEND_LOG4CXX
+-o
+/robotica_ufu/build/movement/humanoid_qt/robot_qt/include/robot_qt/moc_qnode.cpp
+/robotica_ufu/src/movement/humanoid_qt/robot_qt/include/robot_qt/qnode.hpp

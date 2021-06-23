@@ -1,0 +1,8 @@
+prefix=/robotica_ufu/install
+
+Name: rviz_imu_plugin
+Description: Description of rviz_imu_plugin
+Version: 1.1.4
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: rviz

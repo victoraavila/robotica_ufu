@@ -1,0 +1,27 @@
+\subsubsection usage Usage
+\verbatim
+<node name="movement_msgs" pkg="movement_msgs" type="movement_msgs">
+  <param name="rArm0" type="double" value="0.0" />
+  <param name="rArm1" type="double" value="0.0" />
+  <param name="rArm2" type="double" value="0.0" />
+  <param name="lArm0" type="double" value="0.0" />
+  <param name="lArm1" type="double" value="0.0" />
+  <param name="lArm2" type="double" value="0.0" />
+  <param name="rFootX" type="double" value="0.0" />
+  <param name="rFootY" type="double" value="0.0" />
+  <param name="rFootZ" type="double" value="0.0" />
+  <param name="rFootRX" type="double" value="0.0" />
+  <param name="rFootRY" type="double" value="0.0" />
+  <param name="rFootRZ" type="double" value="0.0" />
+  <param name="lFootX" type="double" value="0.0" />
+  <param name="lFootY" type="double" value="0.0" />
+  <param name="lFootZ" type="double" value="0.0" />
+  <param name="lFootRX" type="double" value="0.0" />
+  <param name="lFootRY" type="double" value="0.0" />
+  <param name="lFootRZ" type="double" value="0.0" />
+  <param name="on" type="bool" value="False" />
+  <param name="toJointState" type="bool" value="False" />
+  <param name="toMotorState" type="bool" value="False" />
+</node>
+\endverbatim
+

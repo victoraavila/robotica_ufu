@@ -12,7 +12,7 @@ outline_color_list = [(255, 0, 0), (0, 0, 255), (0, 0, 255)]
 def get_cnn_files():
     '''Gets the CNN filenames, despite the PC file structure.'''
 
-    #robocup_folder = os.path.join(os.path.expanduser('~'), "robotica_ufu/src/vision/robocup_cnn_files")
+    #robocup_folder = os.path.join(os.path.expanduser('~'), "/robotica_ufu/src/vision/robocup_cnn_files")
     robocup_folder = "/robotica_ufu/src/vision/robocup_cnn_files"
 
     config_file = os.path.join(robocup_folder, "yolov4-tiny-obj.cfg")
@@ -43,10 +43,10 @@ def detect_model(model, current_frame):
         finish_time = time.time()
         fps = 1/(finish_time-start_time)
 
-        print(f"Classes: {classes}, Scores: {scores}")
-        print(f"Boxes: {boxes}")
-        print(f"FPS: {fps}")
-        print('\n')
+        #print(f"Classes: {classes}, Scores: {scores}")
+        #print(f"Boxes: {boxes}")
+        #print(f"FPS: {fps}")
+        #print('\n')
 
         return classes, scores, boxes, int(fps)
 

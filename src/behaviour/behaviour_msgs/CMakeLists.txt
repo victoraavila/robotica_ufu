@@ -28,6 +28,7 @@ add_message_files(
   StateMachineActionsMsg.msg
   GameControllerPlayerMsg.msg
   GameControllerTeamMsg.msg
+  GameState.msg
 )
 
 add_service_files(

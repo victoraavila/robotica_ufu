@@ -355,7 +355,7 @@ class Brain():
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Stand_still' and self.finished_page == 'finished'):
-            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
+            self.walk_service(first_pose = True, move_head = False, walk_flag = False, test_mode = self.test_mode)
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Search_ball' and self.finished_page == 'finished'):

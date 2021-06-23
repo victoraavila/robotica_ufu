@@ -32,6 +32,8 @@ z_sensor_front  = -5                                #Define se o robô caiu de f
 z_sensor_back   = 5                                 #Define se o robô caiu de costas
 x_sensor_left   = -5                                #Define se o robô caiu sobre o lado esquerdo
 x_sensor_right  = 5                                 #Define se o robô caiu sobre o lado direito
+importantMeasuresSensor = 10
+timesMeasuredSensor = (importantMeasuresSensor/2) + 1 
 
 # -------------------------------- Variáveis do Pescoço ------------------------------- #
 
@@ -49,6 +51,8 @@ class Think(object):
     def __init__(self):
         self.listMedsHor = []
         self.listMedsVer = []
+
+        self.listMedsYSensor = []
 
     def vision(self, x_ball, y_ball, roi_width, roi_height,ball):
         self.ball = ball
@@ -137,10 +141,19 @@ class Think(object):
         return self.game_controller
 
     def sensor_think(self, x_sensor, y_sensor, z_sensor):
+        if(len(self.listMedsYSensor) > importantMeasuresSensor): 
+            self.listMedsYSensor.remove(self.listMedsYSensor[0])
+            
         if y_sensor < gravitySecurity:
+            self.listMedsYSensor = self.listMedsYSensor + ["Falled"]
+        else:
+            self.listMedsYSensor = self.listMedsYSensor + ["Stand"]
+        
+        if(self.listMedsYSensor.count("Falled") > timesMeasuredSensor):
             return True
-        else :
-            return False  
+        else:
+            return False
+          
 
     def falled_position(self, x_sensor, y_sensor, z_sensor):
         if z_sensor < z_sensor_front:

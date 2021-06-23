@@ -273,15 +273,15 @@ class Brain():
             
                 elif self.position_falled == 'back':
                     self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-                    self.call_page('page_levantar_no_beck')
+                    self.call_page('stand_up_back')
                 
                 elif self.position_falled == 'left_side':
                     self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-                    self.call_page('page_levantar_ladinho_esquerdo')
+                    self.call_page('stand_up_left')
                 
                 elif self.position_falled == 'right_side':
                     self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-                    self.call_page('front_stand_up')
+                    self.call_page('stand_up_right')
 
             elif self.finished_page == 'finished':
                 self.falled = False
@@ -350,7 +350,7 @@ class Brain():
                 
         elif (self.robot.state == 'S_Kick' and self.finished_page == 'finished'):
             self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-            self.call_page('page_kick')
+            self.call_page('weak_kick')
             #self.finish_kicking = True
             self.update_state_machine()
 

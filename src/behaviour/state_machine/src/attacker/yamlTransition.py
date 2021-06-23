@@ -42,18 +42,18 @@ def yamlTransition(params):
         clientWalkingCmd.update_configuration(
             {
                 "walk_flag": True,
-                "vx": 0.18,
+                "vx": 0.0,
                 "vy": 0.16,
-                "vz": 9.0, 
+                "vz": 0.12, 
                 "slope": 0.0
             }
         )
         
         clientWalkingCtrl.update_configuration(
             {
-                "delayL": 1.20,
-                "delayR": 1.20,
-                "delayAll": 1.20
+                "delayL": 1.18,
+                "delayR": 1.18,
+                "delayAll": 1.18
             }
         )
         
@@ -62,14 +62,14 @@ def yamlTransition(params):
                 "dt": 0.07,
                 "squat": 0.02,
                 "open": 0.0567,
-                "incl": 25.2,
+                "incl": 18.7,
                 "sideIncl": 0.0,
                 "footIncl": 0.0,
                 "comX": 0.0,
                 "comY": 0.0,
                 "comZ": 0.344,
-                "arm0": 10.8,
-                "arm1": 2.7,
+                "arm0": 10.799,
+                "arm1": 2.699,
                 "arm2": 90.0,
                 "calcIK": True,
                 "calcFK": False,
@@ -137,12 +137,12 @@ def yamlTransition(params):
         
         clientWalkingParams.update_configuration(
             {
-                "dt": 0.09,
+                "dt": 0.07,
                 "lip_dt": 0.005,
-                "tS": 0.22,
-                "tD": 0.7,
-                "stepH": 0.05,
-                "zCCorr": 1.2,
+                "tS": 0.266,
+                "tD": 0.01,
+                "stepH": 0.07,
+                "zCCorr": 1.0,
                 "sinFreq": 1.0,
                 "sinAmp": 0.0,
                 "sinPhase": 0.0,
@@ -153,34 +153,34 @@ def yamlTransition(params):
         clientWalkingCmd.update_configuration(
             {
                 "walk_flag": True,
-                "vx": 0.22,
-                "vy": 0.22,
-                "vz": 2.0, 
-                "slope": 2.0
+                "vx": 0.0,
+                "vy": 0.16,
+                "vz": 0.12, 
+                "slope": 0.0
             }
         )
         
         clientWalkingCtrl.update_configuration(
             {
-                "delayL": 1.20,
-                "delayR": 1.20,
-                "delayAll": 1.20
+                "delayL": 1.18,
+                "delayR": 1.18,
+                "delayAll": 1.18
             }
         )
         
         clientModelWalk.update_configuration(
             {
                 "dt": 0.07,
-                "squat": 0.084,
-                "open": 0.053,
-                "incl": 26.0,
+                "squat": 0.02,
+                "open": 0.0567,
+                "incl": 18.7,
                 "sideIncl": 0.0,
                 "footIncl": 0.0,
                 "comX": 0.0,
                 "comY": 0.0,
-                "comZ": 0.475,
-                "arm0": 10.8,
-                "arm1": 2.7,
+                "comZ": 0.344,
+                "arm0": 10.799,
+                "arm1": 2.699,
                 "arm2": 90.0,
                 "calcIK": True,
                 "calcFK": False,
@@ -218,14 +218,14 @@ def yamlTransition(params):
 
         clientControl.update_configuration(
             {
-                "dt": 0.09,
-                "kpUpperBody": 85.0, 
+                "dt": 0.07,
+                "kpUpperBody": 80.0, 
                 "kpHipRoll": 80.0,
                 "kpHipPitch": 80.0,
                 "kpKneePitch": 80.0, 
                 "kpFootPitch": 80.0, 
                 "kpFootRoll": 80.0,
-                "torsoKp": 0.3,
+                "torsoKp": 0.03,
                 "torsoKi": 0.0,
                 "torsoKd": 0.0,
                 "armKp": 0.3,
@@ -243,17 +243,17 @@ def yamlTransition(params):
                 "ctrl_flag": False
             }
         )
-
+        
     if params.decision == "virar esquerda":
         
         clientWalkingParams.update_configuration(
             {
-                "dt": 0.09,
+                "dt": 0.07,
                 "lip_dt": 0.005,
-                "tS": 0.22,
-                "tD": 0.7,
-                "stepH": 0.05,
-                "zCCorr": 1.2,
+                "tS": 0.266,
+                "tD": 0.01,
+                "stepH": 0.07,
+                "zCCorr": 1.0,
                 "sinFreq": 1.0,
                 "sinAmp": 0.0,
                 "sinPhase": 0.0,
@@ -264,34 +264,34 @@ def yamlTransition(params):
         clientWalkingCmd.update_configuration(
             {
                 "walk_flag": True,
-                "vx": 0.33,
-                "vy": 0.33,
-                "vz": 3.0, 
-                "slope": 3.0
+                "vx": 0.0,
+                "vy": 0.0,
+                "vz": 0.28, 
+                "slope": 0.0
             }
         )
         
         clientWalkingCtrl.update_configuration(
             {
-                "delayL": 1.20,
-                "delayR": 1.20,
-                "delayAll": 1.20
+                "delayL": 1.18,
+                "delayR": 1.18,
+                "delayAll": 1.18
             }
         )
         
         clientModelWalk.update_configuration(
             {
                 "dt": 0.07,
-                "squat": 0.084,
-                "open": 0.053,
-                "incl": 26.0,
+                "squat": 0.02,
+                "open": 0.0567,
+                "incl": 18.7,
                 "sideIncl": 0.0,
                 "footIncl": 0.0,
                 "comX": 0.0,
                 "comY": 0.0,
-                "comZ": 0.475,
-                "arm0": 10.8,
-                "arm1": 2.7,
+                "comZ": 0.344,
+                "arm0": 10.799,
+                "arm1": 2.699,
                 "arm2": 90.0,
                 "calcIK": True,
                 "calcFK": False,
@@ -329,14 +329,14 @@ def yamlTransition(params):
 
         clientControl.update_configuration(
             {
-                "dt": 0.09,
-                "kpUpperBody": 85.0, 
+                "dt": 0.07,
+                "kpUpperBody": 80.0, 
                 "kpHipRoll": 80.0,
                 "kpHipPitch": 80.0,
                 "kpKneePitch": 80.0, 
                 "kpFootPitch": 80.0, 
                 "kpFootRoll": 80.0,
-                "torsoKp": 0.3,
+                "torsoKp": 0.03,
                 "torsoKi": 0.0,
                 "torsoKd": 0.0,
                 "armKp": 0.3,

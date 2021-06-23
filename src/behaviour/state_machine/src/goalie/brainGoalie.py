@@ -263,14 +263,14 @@ class Brain():
                 
                 elif self.position_falled == 'left_side':
                     self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-                    self.call_page('stand_up_front')
+                    self.call_page('stand_up_left')
                 
                 elif self.position_falled == 'right_side':
                     self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-                    self.call_page('stand_up_front')
+                    self.call_page('stand_up_right')
 
                 if self.robot.state == 'S_Repositioning':
-                    if self.pageToCall == 'page_right_defense':
+                    if self.pageToCall == 'right_defense':
                         self.call_params(demand_to_turn_left)
                         print('Girando pra esquerda')
 
@@ -302,7 +302,7 @@ class Brain():
             elif self.ball_position == -1:
                 self.pageToCall = 'left_defense'
             else:
-                self.pageToCall = 'central_defense'
+                self.pageToCall = 'right_defense'
 
             self.call_page(self.pageToCall)
             #self.finish_kicking = True

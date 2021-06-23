@@ -21,6 +21,8 @@ class Node():
         #Iniciando o nó e obtendo os arquivos que definem a rede neural
         rospy.init_node(nome_no, anonymous = True)
         self.net = ri.get_cnn_files()
+        self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+        self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)   
         self.model = ri.set_model_input(self.net)
         self.searching = True
 
@@ -31,13 +33,19 @@ class Node():
     def connect_to_webots(self):
         '''Gets the Vision topic sent from Behavior, and subscribe it.'''
 
-        for sublist in rospy.get_published_topics(namespace = "/"):
-            for item in sublist:
-                if "image_proc" in item:
-                    self.vision_topic = item
+        self.topic_found = False
+        while self.topic_found == False:
+            try:
+                for sublist in rospy.get_published_topics(namespace = "/"):
+                    for item in sublist:
+                        if "image_proc" in item:
+                            self.vision_topic = item
 
-        rospy.Subscriber(self.vision_topic, ROS_Image, callback = self.convert_ros_image_to_cv2)
-        rospy.spin()
+                rospy.Subscriber(self.vision_topic, ROS_Image, callback = self.convert_ros_image_to_cv2)
+                self.topic_found = True
+                rospy.spin()
+            except Exception:
+                pass
 
 
     def convert_ros_image_to_cv2(self, message):

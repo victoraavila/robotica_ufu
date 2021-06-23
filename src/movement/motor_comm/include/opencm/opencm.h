@@ -20,9 +20,9 @@
 #define VEL 50
 #define DP 5
 #define INIT_VEL 5
-#define LEFT_LIMIT 2400
-#define RIGHT_LIMIT 1700
-#define UP_LIMIT 1700
+#define LEFT_LIMIT 3062
+#define RIGHT_LIMIT 1028
+#define UP_LIMIT 1412
 #define DOWN_LIMIT 2150
 #define GAP 50
 

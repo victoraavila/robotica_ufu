@@ -20,6 +20,11 @@ ball_width  = 75                                   #Variáveis para nos informar
 ball_height = 75                                   #e largura do raio da bola. Define se
                                                     #a bola está perto ou longe.
 
+importantMeasures = 6                                #Variáveis da media móvel da visão
+timesMeasured = (importantMeasures/2) + 1            #falam o tamanho do vetor de ultimas medidas
+                                                     #e quantas vezes deve ser medido para 
+                                                     #considerar valida a situação
+
 # ------------------------------- Variáveis do Sensor ---------------------------------- #
 
 gravitySecurity = 4                                 #Define gravity da queda do robô
@@ -30,10 +35,10 @@ x_sensor_right  = 5                                 #Define se o robô caiu sobr
 
 # -------------------------------- Variáveis do Pescoço ------------------------------- #
 
-xTop_limit_position     = 2400 - (2400-1700)/100    #Limite superior do motor horizontal    
-xBottom_limit_position  = 1700 + (2400-1700)/100    #Limite inferior do motor horizontal
+xTop_limit_position     = 3062 - (3062-1028)/100    #Limite superior do motor horizontal    
+xBottom_limit_position  = 1028 + (3062-1028)/100    #Limite inferior do motor horizontal
 
-'''De acordo com o config.xml do robô, o cálculo dos limites para o limite superior é dado
+'''De acordo com o opencm.h do robô, o cálculo dos limites para o limite superior é dado
 por lim_sup - (lim_sup + lim_inf/100) e lim_inf + (lim_sup + lim_inf/100) para o limite de 
 segurança inferior'''
 
@@ -41,32 +46,87 @@ x_to_turn_Right = 1938                              #Valores para alinhar corpo 
 x_to_turn_Left  = 2158
 
 class Think(object):
+    def __init__(self):
+        self.listMedsHor = []
+        self.listMedsVer = []
 
     def vision(self, x_ball, y_ball, roi_width, roi_height,ball):
         self.ball = ball
         self.ball_centered = False
         self.ball_close = False
-        self.motorhead = 3 #Movimento de procura
-       
-        if self.ball == True:
-       
-            if x_ball >= xBottom_centralized and x_ball <= xTop_centralized and y_ball >= yBottom_centralized and y_ball <= yTop_centralized:
-                self.ball_centered = True
-                self.motorhead = 0
+        horAction = 3
+        verAction = 3
 
-            # A visao irá verificar o eixo vertical e depois o outro eixo ate centralizar em ambos
+
+        if(len(self.listMedsHor) > importantMeasures): 
+            self.listMedsHor.remove(self.listMedsHor[0])
+
+        if(len(self.listMedsVer) > importantMeasures): 
+            self.listMedsVer.remove(self.listMedsVer[0])
+
+        #Construção da media movel vertical e horizontal
+        if self.ball:
+
+            if x_ball >= xBottom_centralized and x_ball <= xTop_centralized and y_ball >= yBottom_centralized and y_ball <= yTop_centralized:
+                self.listMedsHor = self.listMedsHor + ["Center"]
+                self.listMedsVer = self.listMedsVer + ["Center"]
+            
             else:
                 if x_ball > xTop_to_centralize:
-                    self.motorhead = 1 #Mover para a direita
+                    self.listMedsHor = self.listMedsHor + ["Right"]
 
                 elif x_ball < xBottom_to_centralize:
-                    self.motorhead = -1 #Mover para a esquerda
+                    self.listMedsHor = self.listMedsHor + ["Left"]
 
                 if y_ball > yTop_to_centralize:
-                    self.motorhead = 2 #Mover para baixo
+                    self.listMedsVer = self.listMedsVer + ["Down"]
+
                 elif y_ball < yBottom_to_centralize:
-                    self.motorhead = -2 #Mover para cima
-     
+                    self.listMedsVer = self.listMedsVer + ["Up"]
+        else:
+            self.listMedsHor = self.listMedsHor + ["Out"]
+            self.listMedsVer = self.listMedsVer + ["Out"]
+
+        #Calcula da media movel horizontal
+        
+        if(self.listMedsHor.count("Out") > timesMeasured+1):
+            horAction = 3
+        if(self.listMedsHor.count("Left") > timesMeasured):
+            horAction = -1
+        if(self.listMedsHor.count("Right") > timesMeasured):
+            horAction = 1
+        if(self.listMedsHor.count("Center") > timesMeasured*3/4):
+            horAction = 0
+
+        #Calculo da media movel vertical
+        
+        if(self.listMedsVer.count("Out") > timesMeasured+1):
+            verAction = 3
+        if(self.listMedsVer.count("Up") > timesMeasured):
+            verAction = -2
+        if(self.listMedsVer.count("Down") > timesMeasured):
+            verAction = 2
+        if(self.listMedsVer.count("Center") > timesMeasured*3/4):
+            verAction = 0
+        
+        #Tomada de decisão para motorhead com base no medido da media móvel
+        if(verAction == 3 and horAction == 3): #Completamente fora
+            self.motorhead = 3
+
+        elif(verAction == 0 and horAction == 0):#Centralizou
+            self.motorhead = 0
+            self.ball_centered = True
+
+        elif(horAction == 0): #Centralizou horizontalmente
+            self.motorhead = verAction
+
+        elif(verAction == 0): #Centralizou verticalmente
+            self.motorhead = horAction
+
+        else: #Prioriza centralização horizontal em caso de não estar centralizado em ambos
+            self.motorhead = horAction
+        
+
         if roi_width*roi_height >= ball_height*ball_width:
             self.ball_close = True
 

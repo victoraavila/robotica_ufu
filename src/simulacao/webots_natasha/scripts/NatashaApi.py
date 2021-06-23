@@ -116,7 +116,7 @@ class NatashaApi():
             self.joint_command = msg
 
     def get_connection(self, addr):
-        #addr = "127.0.0.1:10001"
+        addr = "127.0.0.1:10001"
         host, port = addr.split(':')
         port = int(port)
         rospy.loginfo(f"Connecting to '{addr}'", logger_name="rc_api")

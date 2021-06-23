@@ -47,11 +47,6 @@ if [[ -z "$ROBOCUP_SIMULATOR_ADDR" ]]; then
     exit 2
 fi
 
-if [[ -z "$ROBOCUP_MIRROR_SERVER_IP" ]]; then
-    echo "ROBOCUP_MIRROR_SERVER_IP is not set! Exiting."
-    exit 2
-fi
-
 BRINGUP_DIR=$(rospack find webots_natasha)
 
 if [[ -z "$BRINGUP_DIR" ]]; then

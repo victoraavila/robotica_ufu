@@ -12,7 +12,7 @@ outline_color_list = [(255, 0, 0), (0, 0, 255), (0, 0, 255)]
 def get_cnn_files():
     '''Gets the CNN filenames, despite the PC file structure.'''
 
-    robocup_folder = os.path.join(os.path.expanduser('~'), "edrom/src/vision/robocup_cnn_files")
+    robocup_folder = os.path.join(os.path.expanduser('~'), "robotica_ufu/src/vision/robocup_cnn_files")
 
     config_file = os.path.join(robocup_folder, "yolov4-tiny-obj.cfg")
     weights_file = os.path.join(robocup_folder, "yolov4-tiny-obj_best.weights")

@@ -124,5 +124,10 @@ EOF
 #############
 # Start ROS #
 #############
+if [[$1 = offense]]; then
+    exec roslaunch state_machine natasha_attacker.launch
+fi
 
-exec roslaunch state_machine natasha_attacker.launch
+if [[$1 = goalie]]; then
+    exec roslaunch state_machine stek_goalie.launch
+fi

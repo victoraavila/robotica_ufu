@@ -16,8 +16,8 @@ xBottom_to_centralize = 180                         #os valores para centralizar
 yTop_to_centralize    = 270                         #com a bola.
 yBottom_to_centralize = 140
 
-ball_width  = 75                                   #Variáveis para nos informar a altura
-ball_height = 75                                   #e largura do raio da bola. Define se
+ball_width  = 120                                   #Variáveis para nos informar a altura
+ball_height = 120                                   #e largura do raio da bola. Define se
                                                     #a bola está perto ou longe.
 
 importantMeasures = 6                                #Variáveis da media móvel da visão

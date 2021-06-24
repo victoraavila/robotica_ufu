@@ -78,7 +78,7 @@ class Node():
 
         ri.draw_results(self.current_frame, self.classes, self.scores, self.boxes)
 
-        cv2.imshow("Current Frame", self.current_frame)
+        #cv2.imshow("Current Frame", self.current_frame)
         cv2.waitKey(1)
 
     def publish_results(self):

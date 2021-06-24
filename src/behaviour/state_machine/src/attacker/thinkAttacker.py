@@ -99,7 +99,7 @@ class Think(object):
             horAction = -1
         if(self.listMedsHor.count("Right") > timesMeasured):
             horAction = 1
-        if(self.listMedsHor.count("Center") > timesMeasured*3/4):
+        if(self.listMedsHor.count("Center") > timesMeasured/2):
             horAction = 0
 
         #Calculo da media movel vertical
@@ -110,7 +110,7 @@ class Think(object):
             verAction = -2
         if(self.listMedsVer.count("Down") > timesMeasured):
             verAction = 2
-        if(self.listMedsVer.count("Center") > timesMeasured*3/4):
+        if(self.listMedsVer.count("Center") > timesMeasured/2):
             verAction = 0
         
         #Tomada de decisão para motorhead com base no medido da media móvel

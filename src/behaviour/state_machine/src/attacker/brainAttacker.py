@@ -297,8 +297,6 @@ class Brain():
             PREMONIÇÃO- Fazer posição intermediária;
             '''
         elif (self.robot.state == 'S_Walking' and self.finished_page == 'finished' and (self.before_body_alignment == self.body_alignment)):
-            
-            self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
 
             if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
                 self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
@@ -335,7 +333,7 @@ class Brain():
 
             elif self.body_alignment == 'turn_right':
                 # Mandar comando para carregar yaml para girar para direita
-                [self.vx,self.vy,self.vz] = demand_to_turn_left
+                [self.vx,self.vy,self.vz] = demand_to_turn_right
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('girando para direita')

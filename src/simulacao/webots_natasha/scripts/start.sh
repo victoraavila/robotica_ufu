@@ -125,4 +125,4 @@ EOF
 # Start ROS #
 #############
 
-exec xvfb-run roslaunch state_machine natasha_attacker.launch
+exec roslaunch state_machine natasha_attacker.launch

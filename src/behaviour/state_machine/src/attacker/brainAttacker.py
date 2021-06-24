@@ -61,8 +61,8 @@ class Brain():
         self.falled = False 
         self.position_falled = ''
         self.x_sensor = 0.0
-        self.y_sensor = 0.0
-        self.z_sensor = 0.0
+        self.y_sensor = 0.16
+        self.z_sensor = 0.12
 
         # Variáveis das pages do movimento 
         self.page = ''
@@ -293,6 +293,8 @@ class Brain():
             PREMONIÇÃO- Fazer posição intermediária;
             '''
         elif (self.robot.state == 'S_Walking' and self.finished_page == 'finished' and (self.before_body_alignment == self.body_alignment)):
+            
+            self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
 
             if (self.walk_flag == True) and (self.walk_counter >= (self.before_walk_counter + self.steps_number)):
                 self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)

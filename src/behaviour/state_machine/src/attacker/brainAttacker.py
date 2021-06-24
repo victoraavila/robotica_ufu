@@ -28,9 +28,9 @@ Definições estabelecidas na criação desse código do behavior:
 """
 
 # ----------------------- Constantes de Alinhamento do Corpo ----------------------- #
-demand_to_go_ahead = "andar reto"                       #Estas três constantes são as
-demand_to_turn_left = "virar esquerda"                  #strings a serem passadas ao
-demand_to_turn_right = "virar direita"                  #service do yamlTransition.py,
+demand_to_go_ahead = [0, 0.16, 0.12]                    #Estas três constantes são as
+demand_to_turn_left = [0, 0, 0.28]                      #strings a serem passadas ao
+demand_to_turn_right = [0, 0.16, 0.12]                  #service do yamlTransition.py,
                                                         #relativas à chamada de parâmetros
                                                         #de alinhamento do corpo.
 
@@ -172,12 +172,12 @@ class Brain():
 
             print("Service call failed: {e}")
     
-    def callback_walking(self,msg):
+    '''def callback_walking(self,msg):
         self.walk_flag = msg.walk_flag
         self.test_mode = msg.test_mode
         self.vx = msg.vx
         self.vy = msg.vy
-        self.vz = msg.vz
+        self.vz = msg.vz'''
 
     def callback_sensor(self, msg):
         #pegar valores pertinentes do sensor IMU 
@@ -209,7 +209,7 @@ class Brain():
 
           print(f"Service call failed: {e}")
 
-    def call_params(self, string):
+    '''def call_params(self, string):
 
         try:
 
@@ -225,7 +225,7 @@ class Brain():
 
         except rospy.ServiceException as e:
 
-          print (f"Service call failed: {e}")
+          print (f"Service call failed: {e}")'''
 
     # Método destinado a repassar as variveis para a máquina de estados
     def update_state_machine(self):
@@ -317,7 +317,7 @@ class Brain():
             if self.body_alignment == 'body_centralized':
                 # Mandar comando para carregar yaml para andar reto
 
-                self.call_params(demand_to_go_ahead)
+                [self.vx,self.vy,self.vz] = demand_to_go_ahead
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('Andando reto')
@@ -327,7 +327,7 @@ class Brain():
             elif self.body_alignment == 'turn_left':
                 # Mandar comando para carregar yaml para girar para esquerda
 
-                self.call_params(demand_to_turn_left)
+                [self.vx,self.vy,self.vz] = demand_to_turn_left
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('girando para esquerda')
@@ -335,7 +335,7 @@ class Brain():
 
             elif self.body_alignment == 'turn_right':
                 # Mandar comando para carregar yaml para girar para direita
-                self.call_params(demand_to_turn_right)
+                [self.vx,self.vy,self.vz] = demand_to_turn_left
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = False, walk_flag = True, test_mode = self.test_mode)
                 print('girando para direita')
@@ -379,7 +379,7 @@ class Brain():
             elif self.body_alignment == 'turn_left':
                 
                 if (self.before_body_alignment != self.body_alignment):
-                    self.call_params(demand_to_turn_left)
+                    [self.vx,self.vy,self.vz] = demand_to_turn_left
                 
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = True, walk_flag = True, test_mode = self.test_mode)
@@ -387,7 +387,7 @@ class Brain():
             elif self.body_alignment == 'turn_right':
 
                 if (self.before_body_alignment != self.body_alignment):
-                    self.call_params(demand_to_turn_right)
+                    [self.vx,self.vy,self.vz] = demand_to_turn_right
 
                 self.moving = True
                 self.walk_service(self.first_pose, move_head = True, walk_flag = True, test_mode = self.test_mode)
@@ -405,7 +405,6 @@ class Brain():
         rospy.Subscriber('/opencm/request', OpencmRequestMsg, self.callback_head)
         rospy.Subscriber('/humanoid_model/jointState', JointStateMsg, self.callback_pages)
         rospy.Subscriber('/humanoid_walking/lipFeedback', LipFeedBack, self.callback_ground)
-        rospy.Subscriber('/humanoid_walking/walking_params_state', LipParamsMsg, self.callback_walking)
 
         """ self.pub_cm_request = rospy.Publisher('opencm/request', OpencmRequestMsg) """
         self.pub_comm_head_params = rospy.Publisher('/motor_comm/head_params', HeadMoveMsg, queue_size = 100)

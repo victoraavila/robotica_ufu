@@ -19,5 +19,5 @@
 
 
   <!-- Humanoid Config -->
-  <node name="humanoid_config" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" >   </node>
+  <!--node name="humanoid_config" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" >   </node-->
 </launch>

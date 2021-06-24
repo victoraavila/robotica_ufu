@@ -385,9 +385,9 @@ bool LipWalkNode::walkingCmd(movement_msgs::LipCmdSrv::Request& cmd, movement_ms
 {
     //ROS_INFO("[LIP_WALK] Walking CMDs Updated");
     //ROS_INFO("[LIP_WALK] Vx : %4.3f Vy: %4.3f Vz: %4.3f", cmd.vx, cmd.vy, cmd.vz);
-    //vx         = cmd.vx;
-    //vy         = cmd.vy;
-    //vz         = cmd.vz;
+    vx         = cmd.vx;
+    vy         = cmd.vy;
+    vz         = cmd.vz;
 
     walk_flag  = cmd.walk_flag;
     first_pose  = cmd.first_pose;

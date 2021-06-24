@@ -124,6 +124,5 @@ EOF
 #############
 # Start ROS #
 #############
-echo "chegay"
 
 exec roslaunch state_machine natasha_attacker.launch

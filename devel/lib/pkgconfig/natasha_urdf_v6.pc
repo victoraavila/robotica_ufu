@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: natasha_urdf_v6
-Description: Description of natasha_urdf_v6
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

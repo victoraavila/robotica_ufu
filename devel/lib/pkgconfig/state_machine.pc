@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: state_machine
-Description: Description of state_machine
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

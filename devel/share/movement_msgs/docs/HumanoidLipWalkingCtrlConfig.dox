@@ -1,8 +1,0 @@
-\subsubsection parameters ROS parameters
-
-Reads and maintains the following parameters on the ROS server
-
-- \b "~delayL" : \b [double] delayL min: 0.1, default: 1.0, max: 6.0
-- \b "~delayR" : \b [double] delayR min: 0.1, default: 1.0, max: 6.0
-- \b "~delayAll" : \b [double] delayAll min: 0.1, default: 1.0, max: 6.0
-

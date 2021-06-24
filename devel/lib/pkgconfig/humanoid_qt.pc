@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: humanoid_qt
-Description: Description of humanoid_qt
-Version: 0.1.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

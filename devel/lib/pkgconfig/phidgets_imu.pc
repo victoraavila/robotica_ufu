@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: phidgets_imu
-Description: Description of phidgets_imu
-Version: 0.7.4
-Cflags: -I/robotica_ufu/src/movement/3rdparty/phidgets_drivers/phidgets_imu/include -I/usr/include
-Libs: -L${prefix}/lib -lphidgets_imu /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
-Requires: diagnostic_msgs diagnostic_updater nodelet pluginlib phidgets_api roscpp sensor_msgs std_msgs std_srvs tf

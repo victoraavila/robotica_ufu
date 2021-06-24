@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: motor_set_control
-Description: Description of motor_set_control
-Version: 0.0.0
-Cflags: -I/robotica_ufu/src/movement/motor_set_control/include
-Libs: -L${prefix}/lib -lmotor_set_control
-Requires: roscpp std_msgs movement_msgs movement_util message_filters dynamic_reconfigure humanoid_loadmap

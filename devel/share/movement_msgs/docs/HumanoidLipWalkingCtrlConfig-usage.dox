@@ -1,9 +1,0 @@
-\subsubsection usage Usage
-\verbatim
-<node name="movement_msgs" pkg="movement_msgs" type="movement_msgs">
-  <param name="delayL" type="double" value="1.0" />
-  <param name="delayR" type="double" value="1.0" />
-  <param name="delayAll" type="double" value="1.0" />
-</node>
-\endverbatim
-

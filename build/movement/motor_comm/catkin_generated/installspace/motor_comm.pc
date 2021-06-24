@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/install
-
-Name: motor_comm
-Description: Description of motor_comm
-Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -lmotor_comm
-Requires: movement_msgs humanoid_loadmap dynamixel_sdk dynamixel_workbench_toolbox movement_util

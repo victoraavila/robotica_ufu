@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/install
-
-Name: dynamixel_sdk
-Description: Description of dynamixel_sdk
-Version: 3.5.3
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -ldynamixel_sdk
-Requires: 

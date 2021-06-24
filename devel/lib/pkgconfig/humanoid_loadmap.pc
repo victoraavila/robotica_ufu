@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: humanoid_loadmap
-Description: Description of humanoid_loadmap
-Version: 0.0.0
-Cflags: -I/robotica_ufu/src/movement/humanoid_loadmap/include
-Libs: -L${prefix}/lib 
-Requires: roscpp movement_util movement_msgs eigen_conversions roslib

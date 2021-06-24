@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/install
-
-Name: dynamixel_workbench_controllers
-Description: Description of dynamixel_workbench_controllers
-Version: 0.1.8
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -ldynamixel_workbench_controllers
-Requires: roscpp std_msgs dynamixel_sdk dynamixel_workbench_msgs dynamixel_workbench_toolbox

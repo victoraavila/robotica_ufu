@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: dynamixel_sdk
-Description: Description of dynamixel_sdk
-Version: 3.5.3
-Cflags: -I/robotica_ufu/src/movement/3rdparty/dynamixel_c++/include
-Libs: -L${prefix}/lib -ldynamixel_sdk
-Requires: 

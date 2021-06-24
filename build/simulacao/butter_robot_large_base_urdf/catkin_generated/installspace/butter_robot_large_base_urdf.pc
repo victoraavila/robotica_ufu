@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/install
-
-Name: butter_robot_large_base_urdf
-Description: Description of butter_robot_large_base_urdf
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

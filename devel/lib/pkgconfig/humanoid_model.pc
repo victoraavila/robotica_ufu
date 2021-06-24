@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: humanoid_model
-Description: Description of humanoid_model
-Version: 0.0.0
-Cflags: -I/robotica_ufu/src/movement/humanoid_model/include
-Libs: -L${prefix}/lib 
-Requires: roscpp std_msgs movement_util humanoid_loadmap movement_msgs dynamic_reconfigure message_filters eigen_conversions

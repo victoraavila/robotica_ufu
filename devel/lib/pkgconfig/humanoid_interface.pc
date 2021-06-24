@@ -1,8 +1,0 @@
-prefix=/robotica_ufu/devel
-
-Name: humanoid_interface
-Description: Description of humanoid_interface
-Version: 0.0.0
-Cflags: -I/robotica_ufu/src/movement/humanoid_interface/include
-Libs: -L${prefix}/lib -lhumanoid_interface
-Requires: hardware_interface realtime_tools dynamic_reconfigure movement_util movement_msgs humanoid_loadmap actionlib actionlib_msgs message_filters dynamixel_sdk dynamixel_workbench_toolbox

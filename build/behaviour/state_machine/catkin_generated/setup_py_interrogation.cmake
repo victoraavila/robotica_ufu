@@ -1,7 +1,0 @@
-set(state_machine_SETUP_PY_SETUP_MODULE "distutils.core")
-set(state_machine_SETUP_PY_VERSION "0.0.0")
-set(state_machine_SETUP_PY_SCRIPTS "")
-set(state_machine_SETUP_PY_PACKAGES "transitions-master")
-set(state_machine_SETUP_PY_PACKAGE_DIRS "src/transitions-master")
-set(state_machine_SETUP_PY_MODULES "")
-set(state_machine_SETUP_PY_MODULE_DIRS "")

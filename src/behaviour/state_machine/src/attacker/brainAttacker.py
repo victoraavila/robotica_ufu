@@ -172,12 +172,8 @@ class Brain():
 
             print("Service call failed: {e}")
     
-    '''def callback_walking(self,msg):
+    def callback_walking(self,msg):
         self.walk_flag = msg.walk_flag
-        self.test_mode = msg.test_mode
-        self.vx = msg.vx
-        self.vy = msg.vy
-        self.vz = msg.vz'''
 
     def callback_sensor(self, msg):
         #pegar valores pertinentes do sensor IMU 
@@ -403,6 +399,7 @@ class Brain():
         rospy.Subscriber('/opencm/request', OpencmRequestMsg, self.callback_head)
         rospy.Subscriber('/humanoid_model/jointState', JointStateMsg, self.callback_pages)
         rospy.Subscriber('/humanoid_walking/lipFeedback', LipFeedBack, self.callback_ground)
+        rospy.Subscriber('/humanoid_walking/walking_params_state', LipParamsMsg, self.callback_walking)
 
         """ self.pub_cm_request = rospy.Publisher('opencm/request', OpencmRequestMsg) """
         self.pub_comm_head_params = rospy.Publisher('/motor_comm/head_params', HeadMoveMsg, queue_size = 100)

@@ -51,6 +51,7 @@ class Think(object):
     def __init__(self):
         self.listMedsHor = []
         self.listMedsVer = []
+        self.listActionsHead = []
 
         self.listMedsYSensor = []
 
@@ -67,6 +68,9 @@ class Think(object):
 
         if(len(self.listMedsVer) > importantMeasures): 
             self.listMedsVer.remove(self.listMedsVer[0])
+
+        if(len(self.listActionsHead) > 80*importantMeasures): 
+            self.listActionsHead.remove(self.listActionsHead[0])
 
         #Construção da media movel vertical e horizontal
         if self.ball:
@@ -114,7 +118,11 @@ class Think(object):
             verAction = 0
         
         #Tomada de decisão para motorhead com base no medido da media móvel
-        if(verAction == 3 and horAction == 3): #Completamente fora
+        if(self.listActionsHead.count(3) > 80*timesMeasured and len(self.listActionsHead) > 90*timesMeasured): #Fora do campo de visão à muito tempo
+            self.motorhead = 4
+            self.listActionsHead.clear()
+
+        elif(verAction == 3 and horAction == 3): #Completamente fora
             self.motorhead = 3
 
         elif(verAction == 0 and horAction == 0):#Centralizou
@@ -130,9 +138,10 @@ class Think(object):
         else: #Prioriza centralização horizontal em caso de não estar centralizado em ambos
             self.motorhead = horAction
         
-
         if roi_width*roi_height >= ball_height*ball_width:
             self.ball_close = True
+
+        self.listActionsHead = self.listActionsHead + [self.motorhead]
 
         return (self.ball_centered, self.ball_close, self.motorhead)
 

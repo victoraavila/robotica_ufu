@@ -263,10 +263,18 @@ class Brain():
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Search_ball' and self.finished_page == 'finished'):
+
             self.headMsg.pos = self.motorhead
             self.pub_comm_head_params.publish(self.headMsg)
 
-            self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
+            if self.motorhead == 4: #Procurou demais
+                self.call_predefined_movement('turn_left')
+
+            elif self.motorhead == 3: #Casos legitimos
+                self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
+            
+            else:
+                self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
 
             self.update_state_machine()
             

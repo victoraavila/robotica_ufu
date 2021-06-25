@@ -253,6 +253,7 @@ class Brain():
             count = 0
             while count <= 4:
                 self.call_predefined_movement('go_ahead')
+                count += 1
             self.call_predefined_movement('weak_kick')
             #self.finish_kicking = True
             self.update_state_machine()

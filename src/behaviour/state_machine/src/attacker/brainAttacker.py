@@ -54,8 +54,8 @@ class Brain():
         self.falled = False 
         self.position_falled = ''
         self.x_sensor = 0.0
-        self.y_sensor = 0.16
-        self.z_sensor = 0.12
+        self.y_sensor = 0.0
+        self.z_sensor = 0.0
 
         # Variáveis das pages do movimento 
         self.page = ''
@@ -272,18 +272,24 @@ class Brain():
             
         elif (self.robot.state == 'S_Body_alignment' and self.finished_page == 'finished'):    
 
-            self.headMsg.pos = self.motorhead
+            self.headMsg.pos = -self.motorhead
             self.pub_comm_head_params.publish(self.headMsg)
+            self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
+
+            time.sleep(5)
+            self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
             
             if self.body_alignment == 'turn_left':
                 self.moving = True
-
+                print('Body_alignment virando a esquerda com cabeça à ', self.motorhead)
                 self.call_predefined_movement('turn_left')
 
             elif self.body_alignment == 'turn_right':
                 self.moving = True
-
+                print('Body_alignment virando a direita com cabeça à ', self.motorhead)
                 self.call_predefined_movement('turn_right')
+            
+            self.robot.state = 'S_Search_ball'
 
             self.update_state_machine()
     
@@ -315,12 +321,6 @@ class Brain():
 
         self.first_pose = False
         self.walk_service(self.first_pose, move_head = False, walk_flag = False, test_mode = self.test_mode)
-
-        count = 0
-        while count <= 10:
-            print('Entrando em campo!')
-            self.call_predefined_movement('go_ahead')
-            count += 1
 
         # Loop que mantém o Behaviour em execução
         while not rospy.is_shutdown():

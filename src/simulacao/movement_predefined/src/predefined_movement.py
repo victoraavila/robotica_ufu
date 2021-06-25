@@ -32,11 +32,11 @@ class movementPredefined():
     def txtRequested(self, req):
 
         if(req.request == 'turn_left' or req.request == 'turn_right'):
-            dt = 0.068
+            dt = 0.078
         else:
-            dt = 0.03
+            dt = 0.04
 
-        os.chdir('/robotica_ufu/src/simulacao/movement_predefined/source_files') 
+        os.chdir('/robotica_ufu/src/simulacao/movement_predefined/source_files')
         inputTxt = req.request + '.txt'
         
         with open(inputTxt, "r") as file:

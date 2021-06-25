@@ -49,8 +49,8 @@ x_to_turn_Left  = 2158
 
 class Think(object):
     def __init__(self):
-        self.listHistHor = []
-        self.listHistVer = []
+        self.listMedsHor = []
+        self.listMedsVer = []
 
         self.listMedsYSensor = []
 
@@ -62,93 +62,55 @@ class Think(object):
         verAction = 3
 
 
-        if(len(self.listHistHor) > importantMeasures): 
-            self.listHistHor.remove(self.listHistHor[0])
+        if(len(self.listMedsHor) > importantMeasures): 
+            self.listMedsHor.remove(self.listMedsHor[0])
 
-        if(len(self.listHistVer) > importantMeasures): 
-            self.listHistVer.remove(self.listHistVer[0])
+        if(len(self.listMedsVer) > importantMeasures): 
+            self.listMedsVer.remove(self.listMedsVer[0])
 
         #Construção da media movel vertical e horizontal
         if self.ball:
-
             if x_ball > xTop_to_centralize:
-                self.listHistHor = self.listHistHor + ["Right"]
+                self.listMedsHor = self.listMedsHor + ["Right"]
 
             elif x_ball < xBottom_to_centralize:
-                self.listHistHor = self.listHistHor + ["Left"]
+                self.listMedsHor = self.listMedsHor + ["Left"]
             
             elif x_ball >= xBottom_centralized and x_ball <= xTop_centralized:
-                self.listHistHor = self.listHistHor + ["Center"]
+                self.listMedsHor = self.listMedsHor + ["Center"]
 
             if y_ball > yTop_to_centralize:
-                self.listHistVer = self.listHistVer + ["Down"]
+                self.listMedsVer = self.listMedsVer + ["Down"]
 
             elif y_ball < yBottom_to_centralize:
-                self.listHistVer = self.listHistVer + ["Up"]
-
+                self.listMedsVer = self.listMedsVer + ["Up"]
+            
             elif y_ball >= yBottom_centralized and y_ball <= yTop_centralized:
-                self.listHistVer = self.listHistVer + ["Center"]
-                
+                self.listMedsVer = self.listMedsVer + ["Center"]
         else:
-            self.listHistHor = self.listHistHor + ["Out"]
-            self.listHistVer = self.listHistVer + ["Out"]
+            self.listMedsHor = self.listMedsHor + ["Out"]
+            self.listMedsVer = self.listMedsVer + ["Out"]
 
         #Calcula da media movel horizontal
         
-        """ if(self.listHistHor.count("Out") > timesMeasured+1):
+        if(self.listMedsHor.count("Out") > timesMeasured+1):
             horAction = 3
-        if(self.listHistHor.count("Left") > timesMeasured):
+        if(self.listMedsHor.count("Left") > timesMeasured):
             horAction = -1
-        if(self.listHistHor.count("Right") > timesMeasured):
+        if(self.listMedsHor.count("Right") > timesMeasured):
             horAction = 1
-        if(self.listHistHor.count("Center") > timesMeasured/2):
-            horAction = 0 """
-
-        cont = importantMeasures - 1
-        horRecente = "Out"
-        while cont >= 0:
-            if (listHistHor[cont]!="Out"):
-                horRecente = listHistHor[cont]
-                break
-
-            cont = cont - 1
-
-        if(horRecente == "Out"):
-            horAction = 3
-        if(horRecente == "Left"):
-            horAction = -1
-        if(horRecente == "Right"):
-            horAction = 1
-        if(horRecente == "Center"):
+        if(self.listMedsHor.count("Center") > timesMeasured/2):
             horAction = 0
-        
+
         #Calculo da media movel vertical
         
-        """ if(self.listHistVer.count("Out") > timesMeasured+1):
+        if(self.listMedsVer.count("Out") > timesMeasured+1):
             verAction = 3
-        if(self.listHistVer.count("Up") > timesMeasured):
+        if(self.listMedsVer.count("Up") > timesMeasured):
             verAction = -2
-        if(self.listHistVer.count("Down") > timesMeasured):
+        if(self.listMedsVer.count("Down") > timesMeasured):
             verAction = 2
-        if(self.listHistVer.count("Center") > timesMeasured/2):
-            verAction = 0 """
-
-        cont = importantMeasures - 1
-        verRecente = "Out"
-        while cont >= 0:
-            if (listHistVer[cont]!="Out"):
-                verRecente = listHistVer[cont]
-                break
-
-            cont = cont - 1
-        
-        if(verRecente == "Out"):
-            verAction = 3
-        if(verRecente == "Up"):
-            verAction = -2
-        if(verRecente == "Down"):
-            verAction = 2
-        if(verRecente == "Center"):
+        if(self.listMedsVer.count("Center") > timesMeasured/2):
             verAction = 0
         
         #Tomada de decisão para motorhead com base no medido da media móvel

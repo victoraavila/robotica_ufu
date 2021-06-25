@@ -71,6 +71,7 @@ add_service_files(
   MovementSrv.srv
   OpenCm.srv
   MovementStatesSrv.srv
+  PredefinedMovementSrv.srv
 )
 
 generate_messages(

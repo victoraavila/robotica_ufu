@@ -250,6 +250,9 @@ class Brain():
             self.robot.state = 'S_Search_ball'    
 
         elif (self.robot.state == 'S_Kick' and self.finished_page == 'finished'):
+            count = 0
+            while count <= 4:
+                self.call_predefined_movement('go_ahead')
             self.call_predefined_movement('weak_kick')
             #self.finish_kicking = True
             self.update_state_machine()

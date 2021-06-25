@@ -240,11 +240,9 @@ class Brain():
             elif self.body_alignment == 'turn_right':
                 self.moving = True
 
-                #Chamando page de virar para a esquerda varias vezes, para completar giro pra direita
-                while count <= 3:
-                    self.call_predefined_movement('turn_left')
-                    print('Girando para direita')
-                    count += 1
+                #Chamando page de virar para a direita 
+                self.call_predefined_movement('turn_right')
+                print('Girando para direita')
             
             
             self.update_state_machine()
@@ -281,11 +279,7 @@ class Brain():
             elif self.body_alignment == 'turn_right':
                 self.moving = True
 
-                count = 0
-                while count <= 3:
-                    self.call_predefined_movement('turn_left')
-
-                    count += 1
+                self.call_predefined_movement('turn_right')
 
             self.update_state_machine()
     

@@ -12,6 +12,7 @@ dt = 0.07
 class movementPredefined():
 
     def __init__(self):
+        
         #Dados enviados para Api
         velocityArray = [2]*18
         velocityArray += [0.5]*2
@@ -30,12 +31,12 @@ class movementPredefined():
     
     def txtRequested(self, req):
 
-        if(req.request == 'turn_left'):
+        if(req.request == 'turn_left' or req.request == 'turn_right'):
             dt = 0.068
         else:
             dt = 0.03
 
-        os.chdir( '/robotica_ufu/src/simulacao/movement_predefined/source_files')
+        os.chdir('/robotica_ufu/src/simulacao/movement_predefined/source_files') 
         inputTxt = req.request + '.txt'
         
         with open(inputTxt, "r") as file:
@@ -49,6 +50,9 @@ class movementPredefined():
             for i in range(len(vectorPositions)):
                 vectorPositions[i] = float(vectorPositions[i])
             
+            if(req.request == 'turn_right'):
+                vectorPositions = self.invertLegs(vectorPositions)
+
             self.controllerMsg.position = vectorPositions
 
             self.pubToController.publish(self.controllerMsg)
@@ -58,6 +62,21 @@ class movementPredefined():
         
         self.SrvPredefined.sucess = True
         return self.SrvPredefined
+    
+    def invertLegs(self, vector):
+        for i in range(len(vector)):
+            if(not i%2 and i > 4 and i < 18):
+                if(i == 10):     
+                    temp = vector[i]
+                    vector[i] = vector[i+1]
+                    vector[i+1] = temp
+                else:
+                    temp = vector[i]
+                    vector[i] = -vector[i+1]
+                    vector[i+1] = -temp
+
+        return vector
+
 
 if __name__ == '__main__':
     rospy.init_node('Predefined_movement_node', anonymous=False)

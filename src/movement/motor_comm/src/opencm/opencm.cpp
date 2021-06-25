@@ -107,7 +107,10 @@ void OpenCM::sendHeadPosition(const movement_msgs::HeadMoveMsg::ConstPtr& msg)
 void OpenCM::switchHead()
 {   
     if (stateSM == "S_Move_head" || stateSM == "S_Walking_head")
-    {
+    {   
+        for(int i = 0; i <= 17; i++){
+            opencmReq.data[i] = forcedFirstPose[i];
+        }
         switch (headDecision)
         {
             case -1: // Mover para a esquerda

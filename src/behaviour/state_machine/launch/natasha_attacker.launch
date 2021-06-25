@@ -3,7 +3,8 @@
 	<node name="natashaApi" pkg="webots_natasha" type="NatashaApi.py" output="screen" >    </node>
 
 	<!-- Movement -->
-	<include file="$(find movecreator_qt)/launch/natasha_movecreator.launch"></include>
+	<include file="$(find humanoid_walking)/launch/natasha_walking.launch"></include>
+	<node name="movementPredefined" pkg="movement_predefined" type="predefined_movement.py" output="screen" >    </node>
 
 	<!-- Simulation Webots
   	<include file="$(find webots_natasha)/launch/start_simulation.launch"/>-->
@@ -15,7 +16,6 @@
 	</node>-->
 
 	<!-- Actions -->
-	<node name="yamlTransition" pkg="state_machine" type="yamlTransition.py" output="screen" >   </node>
 	<node name="brainAttacker" pkg="state_machine" type="brainAttacker.py" output="screen" >    </node>
 
 	<!-- Vision 

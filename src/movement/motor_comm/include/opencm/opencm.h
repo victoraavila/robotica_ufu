@@ -35,6 +35,7 @@ const int EX_106    = 107;
 const int AX_12     =  12;
 const int AX_18     =  18;
 const int RX_64     =  64;
+const int forcedFirstPose[20] = {1925, 2170, 2017, 2078, 3071, 1024, 2091, 2007, 1920, 2167, 2561, 2568, 1618, 2488, 2182, 1921, 2180, 1911, 2048, 2048};
 
 class OpenCM
 {

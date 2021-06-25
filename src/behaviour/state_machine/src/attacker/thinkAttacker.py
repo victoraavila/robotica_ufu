@@ -193,16 +193,6 @@ class Think(object):
             body_alignment = 'body_centralized'
 
         return(body_alignment, limit_reached)
-
-    def feedback_page(self, page):
-
-        if page == "Last_Page":
-
-            return "finished"
-
-        else:
-
-            return "not_finished"
     
     def period_counter(self, wState, old_wState, counter, walk_flag, motor_limit_reached):
         

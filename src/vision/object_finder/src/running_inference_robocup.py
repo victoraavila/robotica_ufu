@@ -52,7 +52,7 @@ def detect_model(model, current_frame):
 
         #print(f"Classes: {classes}, Scores: {scores}")
         #print(f"Boxes: {boxes}")
-        #print(f"FPS: {fps}")
+        print("FPS: ", fps)
         #print('\n')
 
         return classes, scores, boxes, int(fps)

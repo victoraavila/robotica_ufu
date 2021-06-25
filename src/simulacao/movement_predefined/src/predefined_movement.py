@@ -35,7 +35,7 @@ class movementPredefined():
         else:
             dt = 0.03
 
-        os.chdir( '/robotica_ufu/src/simulacao/movement_predefined/source_files') )
+        os.chdir( '/robotica_ufu/src/simulacao/movement_predefined/source_files')
         inputTxt = req.request + '.txt'
         
         with open(inputTxt, "r") as file:

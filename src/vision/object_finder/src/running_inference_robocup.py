@@ -12,8 +12,15 @@ outline_color_list = [(255, 0, 0), (0, 0, 255), (0, 0, 255)]
 def get_cnn_files():
     '''Gets the CNN filenames, despite the PC file structure.'''
 
-    #robocup_folder = os.path.join(os.path.expanduser('~'), "/robotica_ufu/src/vision/robocup_cnn_files")
-    robocup_folder = "/robotica_ufu/src/vision/robocup_cnn_files"
+    ## Se for um conteiner, o diretorio robocup_folder eh o definido dentro do for
+    arq = open('/proc/self/cgroup', 'r')
+    linhas = arq.readlines()
+
+    robocup_folder = os.path.join(os.path.expanduser('~'), "/robotica_ufu/src/vision/robocup_cnn_files")
+    for linha in linhas:
+        if 'docker' in linha:
+            robocup_folder = "/robotica_ufu/src/vision/robocup_cnn_files"
+            break
 
     config_file = os.path.join(robocup_folder, "yolov4-tiny-obj.cfg")
     weights_file = os.path.join(robocup_folder, "yolov4-tiny-obj_best.weights")

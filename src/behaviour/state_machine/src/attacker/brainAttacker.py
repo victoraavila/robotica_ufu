@@ -27,13 +27,6 @@ Definições estabelecidas na criação desse código do behavior:
     - As variaveis SEMPRE serão passadas para a maquina de estados dentro do método update_state_machine.
 """
 
-# ----------------------- Constantes de Alinhamento do Corpo ----------------------- #
-demand_to_go_ahead = [0, 0.16, 0.12]                    #Estas três constantes são as
-demand_to_turn_left = [0, 0, 0.28]                      #strings a serem passadas ao
-demand_to_turn_right = [0, 0.16, 0.12]                  #service do yamlTransition.py,
-                                                        #relativas à chamada de parâmetros
-                                                        #de alinhamento do corpo.
-
 class Brain():
 
     def __init__(self):
@@ -227,27 +220,34 @@ class Brain():
         elif (self.robot.state == 'S_Walking' and self.finished_page == 'finished'):
             
             count = 0
-            while count <= 4:
-                if self.body_alignment == 'body_centralized':
-                    # Mandar comando para carregar yaml para andar reto
-                    self.moving = True
+            
+            if self.body_alignment == 'body_centralized':
+                self.moving = True
+                
+                #Chamando page de andar reto varias vezes, pois anda pouco
+                while count <= 4:
                     self.call_predefined_movement('go_ahead')
                     print('Andando reto')
-                    
-                elif self.body_alignment == 'turn_left':
-                    # Mandar comando para carregar yaml para girar para esquerda
-                    self.moving = True
-                    self.call_predefined_movement('go_ahead')
-                    print('Girando para esquerda')
-
-                elif self.body_alignment == 'turn_right':
-                    # Mandar comando para carregar yaml para girar para direita
-                    self.moving = True
-                    self.call_predefined_movement('go_ahead')
-                    print('Girando para direita')
+                    count += 1
                 
-                count += 1
-                self.update_state_machine()
+            elif self.body_alignment == 'turn_left':
+                self.moving = True
+
+                #Chamando page de virar para a esquerda
+                self.call_predefined_movement('turn_left')
+                print('Girando para esquerda')
+
+            elif self.body_alignment == 'turn_right':
+                self.moving = True
+
+                #Chamando page de virar para a esquerda varias vezes, para completar giro pra direita
+                while count <= 3:
+                    self.call_predefined_movement('turn_left')
+                    print('Girando para direita')
+                    count += 1
+            
+            
+            self.update_state_machine()
 
             self.robot.state = 'S_Search_ball'    
 
@@ -269,24 +269,25 @@ class Brain():
             self.update_state_machine()
             
         elif (self.robot.state == 'S_Body_alignment' and self.finished_page == 'finished'):    
+
+            self.headMsg.pos = self.motorhead
+            self.pub_comm_head_params.publish(self.headMsg)
             
-            count = 0
-            while count <= 4:
-                self.headMsg.pos = self.motorhead
-                self.pub_comm_head_params.publish(self.headMsg)
+            if self.body_alignment == 'turn_left':
+                self.moving = True
 
-                if self.body_alignment == 'turn_left':
+                self.call_predefined_movement('turn_left')
 
-                    self.moving = True
-                    self.call_predefined_movement('go_ahead')
+            elif self.body_alignment == 'turn_right':
+                self.moving = True
 
-                elif self.body_alignment == 'turn_right':
+                count = 0
+                while count <= 3:
+                    self.call_predefined_movement('turn_left')
 
-                    self.moving = True
-                    self.call_predefined_movement('go_ahead')
+                    count += 1
 
-                count += 1
-                self.update_state_machine()
+            self.update_state_machine()
     
     def start(self):
 

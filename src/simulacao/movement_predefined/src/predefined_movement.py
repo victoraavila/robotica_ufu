@@ -30,9 +30,14 @@ class movementPredefined():
     
     def txtRequested(self, req):
 
-        os.chdir('/robotica_ufu/src/simulacao/movement_predefined/source_files')
-        inputTxt = req.request + '.txt'
+        if(req.request == 'turn_left'):
+            dt = 0.068
+        else:
+            dt = 0.03
 
+        os.chdir( os.path.join(os.getenv('HOME'), 'robotica_ufu/src/simulacao/movement_predefined/source_files') )
+        inputTxt = req.request + '.txt'
+        
         with open(inputTxt, "r") as file:
             txt = file.readlines()
 
@@ -48,7 +53,7 @@ class movementPredefined():
 
             self.pubToController.publish(self.controllerMsg)
             #rospy.Rate(14)
-            time.sleep(0.03)
+            time.sleep(dt)
             count += 2
         
         self.SrvPredefined.sucess = True

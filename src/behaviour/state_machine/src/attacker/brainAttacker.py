@@ -202,15 +202,19 @@ class Brain():
 
                 if self.position_falled == 'front':
                     self.call_predefined_movement('stand_up_front')
+                    print('stand_up_front')
             
                 elif self.position_falled == 'back':
                     self.call_predefined_movement('stand_up_back')
-                
+                    print('stand_up_back')
+
                 elif self.position_falled == 'left_side':
                     self.call_predefined_movement('stand_up_left')
+                    print('stand_up_left')
                 
                 elif self.position_falled == 'right_side':
                     self.call_predefined_movement('stand_up_right')
+                    print('stand_up_right')
 
             elif self.finished_page == 'finished':
                 self.falled = False
@@ -253,13 +257,16 @@ class Brain():
             count = 0
             while count <= 4:
                 self.call_predefined_movement('go_ahead')
+                print('go_ahead no kick')
                 count += 1
             self.call_predefined_movement('weak_kick')
+            print('chamou kick')
             #self.finish_kicking = True
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Stand_still' and self.finished_page == 'finished'):
             self.call_predefined_movement('first_pose')
+            print('first_pose no stand_still')
             self.update_state_machine()
 
         elif (self.robot.state == 'S_Search_ball' and self.finished_page == 'finished'):
@@ -269,6 +276,7 @@ class Brain():
 
             if self.motorhead == 4: #Procurou demais
                 self.call_predefined_movement('turn_left')
+                print('turn_left no search_ball')
 
             elif self.motorhead == 3: #Casos legitimos
                 self.walk_service(self.first_pose, move_head = True, walk_flag = False, test_mode = self.test_mode)
